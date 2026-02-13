@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a, #000000);
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Daredevil Logo Watermark */
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 700px;
+    height: 700px;
+    background: url("Daredevil\ Comic\ Logo\ Reimagined.jpg") no-repeat center;
+    background-size: contain;
+    opacity: 0.06;
+    transform: translate(-50%, -50%);
+    z-index: -10;
+    pointer-events: none;
+}
+
+
+
+/* Header */
+.top-header {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+}
+
+.top-header h1 {
+    font-size: 42px;
+    color: #b30000;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.top-header h1 span {
+    color: #b30000;
+}
+
+.top-header p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #bdbdbd;
+}
+
+/* Funny Quote */
+.funny-line {
+    margin-top: 15px;
+    font-style: italic;
+    color: #888;
+}
+
+/* Main Photo */
+.main-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 0, 0, 0.5);
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 20px rgba(255, 0, 0, 0.15);
+}
+
+/* Container */
+.container, header, footer {
+    position: relative;
+    z-index: 5;
+}
+
+
+/* Section Titles */
+h2 {
+    font-size: 22px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    color: white;
+    letter-spacing: 2px;
+    border-left: 4px solid #ff1a1a;
+    padding-left: 12px;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* Cards */
+.box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 25px;
+    border-radius: 16px;
+    transition: 0.35s;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Glow Line */
+.box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.15), transparent);
+    transition: 0.5s;
+}
+
+.box:hover::before {
+    left: 100%;
+}
+
+.box:hover {
+    transform: translateY(-8px);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    box-shadow: 0px 0px 25px rgba(255, 0, 0, 0.12);
+}
+
+.box h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.box p {
+    font-size: 14px;
+    color: #bdbdbd;
+    margin-bottom: 18px;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.box a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: rgba(255, 0, 0, 0.15);
+    border: 1px solid rgba(255, 0, 0, 0.4);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.box a:hover {
+    background: #ff1a1a;
+    color: black;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    background: black;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: #777;
+    margin-top: 60px;
+}

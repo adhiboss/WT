@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sadhu Maharaj </title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+  /* Hide default cursor everywhere */
+  * {
+    cursor: none !important;
+  }
+
+  /* Custom cursor image */
+  .custom-cursor {
+    width: 32px;
+    height: 32px;
+    background-image: url("sadu.jpeg");
+    background-size: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  /* Disable custom cursor on mobile */
+  @media (max-width: 768px) {
+    * {
+      cursor: auto !important;
+    }
+    .custom-cursor {
+      display: none;
+    }
+  }
+</style>
+
+
+</head>
+
+
+<body>
+<!-- Star Background -->
+<div class="stars"></div>
+<div class="stars2"></div>
+<div class="stars3"></div>
+
+  <!-- Header -->
+  <header>
+    <h1>WELCOME TO SADHU KOKILA WORLD</h1>
+    <p>Comedian|Actor|Musician|Director|Social Worker|Producer|</p>
+  </header>
+
+
+<section class="about">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>About Me</h2>
+
+      <p class="wave-text">
+        Sahaya Sheelan Shadrach (born 24 March 1966), known by his stage name Sadhu Kokila, is an Indian comedian, musician, actor, film director, producer, occasional screenwriter and lyricist who works in Kannada cinema.
+        He began his career as a composer before taking to acting in films, appearing mostly in comic roles. He has directed ten Kannada films, the most notable one being Raktha Kanneeru (2003).
+      </p>
+
+      <!-- Personal Details -->
+      <div class="about-details">
+        <p><strong>Date of Birth:24 March 1966 </strong> </p>
+        <p><strong>Place: Banglore , Karnataka </strong> </p>
+        <p><strong>Education: He completed his education at St. Joseph's Indian High School in Bangalore and was later awarded an honorary doctorate by the Gangubai Music and Performing Arts University in 2025. </strong> </p>
+      </div>
+
+    </div>
+
+    <div class="about-image">
+      <img src="sadhu.jpeg" alt="Profile Photo">
+    </div>
+  </div>
+</section>
+
+  
+
+
+
+
+
+ <!-- Career Journey Section -->
+<section class="career">
+  <h2><b>Career Journey</b></h2>
+
+  <div class="career-item">
+    <h3><u><b>Early Career:</b></u> Kokila began his career as a musician after he was taken to musician Kasturi Shankar by his brother..</h3>
+    <p></p>
+  </div>
+
+  <div class="career-item">
+    <h3><u><b>Breakthrough:</b></u> As a composer, he is a two-time recipient of the Karnataka State Film Award for Best Music Director, for Rakshasa (2005) and Inthi Ninna Preethiya (2008). As an actor, he has received multiple nominations and awards in the category of Best Comedian in the SIIMA Awards.</h3>
+    <p></p>
+  </div>
+
+  <div class="career-item">
+    <h3><u><b>Popular Roles & Performances:</b></u> 
+        <ul>  <li>Mr&Mr's Ramachari movie IIFA Award Best Comedian</li>
+              <li>Yaare Koogadali movie SIIMA Award Best Comedian</li>
+              <li> Yajamana movie IIFA Award Best Comedian </li>
+            </ul>
+    </h3>
+    <p></p>
+  </div>
+
+  <div class="career-item">
+    <h3><h3><u><b>Recent & Upcoming Projects: </b></u>  Avenger's Doomsday Mr Kokila Cameo , Confirmed by Russo Brothers</h3>
+    <p></p>
+  </div>
+
+</section>
+
+
+ <!-- Social Media & Fan Interaction Section -->
+<!-- Social Media & Fan Interaction Section -->
+<section class="social-section">
+  <div class="social-card">
+
+    <p>
+      <a href="https://www.instagram.com/nimmasadhukokila/?hl=en" target="_blank" class="social-link">
+        Instagram
+        <img src="insta.jpg" alt="Instagram">
+      </a>
+    </p>
+
+    <p>
+      <a href="https://www.youtube.com/watch?v=_7UMkqg3vNk" target="_blank" class="social-link">
+        YouTube
+        <img src="youtube.jpg" alt="YouTube">
+      </a>
+    </p>
+
+    <p>
+      <a href="https://www.facebook.com/NimmaSadhuKokila/" target="_blank" class="social-link">
+        Facebook
+        <img src="facebook.jpg" alt="Facebook">
+      </a>
+    </p>
+
+  </div>
+</section>
+
+
+
+
+  
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Adithya Gowda</p>
+  </footer>
+<!-- Custom Cursor -->
+<div class="custom-cursor"></div>
+
+<script>
+  const cursor = document.querySelector(".custom-cursor");
+
+  document.addEventListener("mousemove", function (e) {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+  });
+</script>
+<a href="../../index.html">⬅ Back to Main WT Page</a>
+
+</body>
+</html>
