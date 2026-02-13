@@ -1,0 +1,368 @@
+/* =========================
+   GLOBAL
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0b0b;
+    color: #e6e6e6;
+    line-height: 1.6;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+/* =========================
+   HEADER / NAV
+========================= */
+header {
+    background: linear-gradient(90deg, #000, #7a0000, #000);
+    border-bottom: 4px solid #b30000;
+    box-shadow: 0 4px 25px rgba(255,0,0,0.25);
+}
+
+nav {
+    width: 90%;
+    margin: auto;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    letter-spacing: 6px;
+    color: #ff1a1a;
+    text-shadow: 0 0 12px rgba(255,0,0,0.9);
+}
+
+.menu a {
+    position: relative;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #f2f2f2;
+    text-decoration: none;
+    margin-left: 32px;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: #ff1a1a;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+.menu a:hover {
+    color: #ff1a1a;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+    height: 100vh;
+    background: #000;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,0,0,0.15), #000 70%);
+    z-index: 1;
+}
+
+/* Side characters */
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 320px;
+    height: 75%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+.hero::before {
+    left: 5%;
+    background-image: url("images/download.jpg");
+}
+
+.hero::after {
+    right: 5%;
+    background-image: url("images/download\ \(1\).jpg");
+}
+
+/* Depth layers */
+.light-bars,
+.grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.light-bars {
+    background: repeating-linear-gradient(
+        -25deg,
+        rgba(255,0,0,0.04),
+        rgba(255,0,0,0.04) 1px,
+        transparent 1px,
+        transparent 60px
+    );
+}
+
+.grain {
+    background: rgba(255,255,255,0.02);
+    mix-blend-mode: overlay;
+    opacity: 0.15;
+}
+
+
+
+/* Hero content */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    letter-spacing: 10px;
+    color: #ff1a1a;
+}
+
+.hero h1.chase {
+    animation: chase 2.8s linear infinite;
+}
+
+.hero p {
+    margin-top: 10px;
+    letter-spacing: 2px;
+}
+
+/* =========================
+   ABOUT / STORY
+========================= */
+.about, .story {
+    width: 85%;
+    margin: 100px auto;
+    text-align: center;
+    animation: fadeRise 1.2s ease-out both;
+}
+
+.about h2, .story h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: #ff1a1a;
+    letter-spacing: 4px;
+}
+
+.about p, .story p {
+    max-width: 750px;
+    margin: 0 auto 18px;
+    color: #ddd;
+}
+
+/* =========================
+   SENSES
+========================= */
+.sense-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 80%;
+    margin: 60px auto;
+}
+
+.sense-grid div {
+    border: 1px solid rgba(255,0,0,0.4);
+    background: rgba(0,0,0,0.6);
+    border-radius: 12px;
+}
+
+
+.sense-grid div:hover {
+    transform: translateY(-15px) scale(1.1);
+    box-shadow: 0 0 25px red;
+}
+
+/* =========================
+   DUALITY
+========================= */
+.duality {
+    display: flex;
+    height: 70vh;
+}
+
+.lawyer, .devil {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lawyer {
+    background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.9)),
+                url("images/Matt\ Murdock.jpg") center/cover no-repeat;
+}
+
+.devil {
+    background: linear-gradient(rgba(122,0,0,.5),rgba(0,0,0,.9)),
+                url("images/Daredevil Wallpaper.jpg") center/cover no-repeat;
+}
+
+.duality-content {
+    text-align: center;
+}
+
+.duality h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    animation: floatText 4s ease-in-out infinite;
+}
+
+.devil h3 {
+    animation: floatText 4s ease-in-out infinite,
+               devilGlow 2.5s alternate infinite;
+}
+
+/* =========================
+   VILLAIN
+========================= */
+.villain {
+    position: relative;
+    background: url("images/X_\ It’s\ what’s\ happening.jpg") center top/cover no-repeat;
+    padding: 160px 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.villain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(0,0,0,.2), rgba(0,0,0,.9));
+    z-index: 1;
+}
+
+.villain h2,
+.villain p {
+    position: relative;
+    z-index: 2;
+}
+
+.villain h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    text-shadow: 0 0 18px rgba(255,0,0,0.8);
+}
+
+/* =========================
+   QUOTE
+========================= */
+blockquote {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 20px 30px;
+    font-size: 30px;
+    font-style: italic;
+    border-left: 6px solid #b30000;
+    background: linear-gradient(to right, rgba(179,0,0,.15), rgba(0,0,0,.8));
+    animation: quoteRise 1.5s ease-out both;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+    background: #000;
+    padding: 22px;
+    text-align: center;
+    border-top: 2px solid #8b0000;
+}
+
+/* =========================
+   FLOATING IMAGE
+========================= */
+.daredevil-float {
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.daredevil-float img {
+    width: 220px;
+    height: auto;
+    opacity: 0.9;
+    animation: floatDD 3s ease-in-out infinite;
+    filter: drop-shadow(0px 0px 20px rgba(255,0,0,0.4));
+}
+
+@keyframes floatDD {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatText {
+    50% { transform: translateY(-14px); }
+}
+
+@keyframes devilGlow {
+    from { text-shadow: 0 0 10px rgba(255,0,0,.4); }
+    to { text-shadow: 0 0 28px rgba(255,0,0,.95); }
+}
+
+@keyframes jump {
+    50% { transform: translateY(-18px); }
+}
+
+@keyframes jumpMove {
+    50% { transform: translate(-120px,-140px); }
+}
+
+@keyframes chase {
+    50% { text-shadow: 0 0 20px rgba(255,0,0,.9); }
+}
+
+@keyframes quoteRise {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
