@@ -1,75 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adhizone 🛒 - Home</title>
+
   <link rel="icon" type="image/png" href="images/logo (2).png">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  <div class="logo">
-    <img src="images/logo (2).png" alt="Adhizone Logo">
+  <!-- ================= HEADER ================= -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="images/logo (2).png" alt="Adhizone Logo">
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Search Adhizone...">
+      <button>Search</button>
+    </div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+<div class="sale-banner">
+  <div class="sale-track">
+    <span>🔥 SALE IS LIVE! 90% OFF on ALL PRODUCTS! 🔥 Hurry Up Limited Time Offer 🚀</span>
+    <span>🔥 SALE IS LIVE! 90% OFF on ALL PRODUCTS! 🔥 Hurry Up Limited Time Offer 🚀</span>
   </div>
+</div>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search Adhizone...">
-    <button>Search</button>
-  </div>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="cart.html">Cart</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-</header>
 
-<section class="hero">
-  <h1>Welcome to Adhizone</h1>
-</section>
+  <!-- ================= MAIN CONTENT ================= -->
+  <main>
 
-<h2 class="section-title">Featured Products</h2>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Welcome to Adhizone</h1>
+        <p>Your one-stop store for gadgets and accessories</p>
+      </div>
+    </section>
 
-<section class="product-grid">
 
-  <div class="card">
-    <img src="images/Headphones.jpg" alt="Wireless Headphones">
-    <h3>Wireless Headphones</h3>
-    <p>₹1999</p>
-    <button>Add to Cart</button>
-  </div>
+    <!-- FEATURED PRODUCTS -->
+    <section class="products-section">
 
-  <div class="card">
-    <img src="images/Smartwatch.jpg" alt="Smart Watch">
-    <h3>Smart Watch</h3>
-    <p>₹2499</p>
-    <button>Add to Cart</button>
-  </div>
+      <h2 class="section-title">Featured Products</h2>
 
-  <div class="card">
-    <img src="images/Mouse.jpg" alt="Gaming Mouse">
-    <h3>Gaming Mouse</h3>
-    <p>₹999</p>
-    <button>Add to Cart</button>
-  </div>
+      <div class="product-grid">
 
-  <div class="card">
-    <img src="images/Speaker.jpg" alt="Bluetooth Speaker">
-    <h3>Bluetooth Speaker</h3>
-    <p>₹1499</p>
-    <button>Add to Cart</button>
-  </div>
+        <div class="card">
+          <img src="images/Headphones.jpg" alt="Wireless Headphones">
+          <h3>Wireless Headphones</h3>
+          <p>₹1999</p>
+          <button>Add to Cart</button>
+        </div>
 
-</section>
+        <div class="card">
+          <img src="images/Smartwatch.jpg" alt="Smart Watch">
+          <h3>Smart Watch</h3>
+          <p>₹2499</p>
+          <button>Add to Cart</button>
+        </div>
 
-<footer>
-  <p>© 2026 Adhizone | HTML + CSS E-Commerce</p>
-  <a href="../../index.html">⬅ Back to Main WT Page</a>
-</footer>
+        <div class="card">
+          <img src="images/Mouse.jpg" alt="Gaming Mouse">
+          <h3>Gaming Mouse</h3>
+          <p>₹999</p>
+          <button>Add to Cart</button>
+        </div>
+
+        <div class="card">
+          <img src="images/Speaker.jpg" alt="Bluetooth Speaker">
+          <h3>Bluetooth Speaker</h3>
+          <p>₹1499</p>
+          <button>Add to Cart</button>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <p>© 2026 Adhizone | HTML + CSS E-Commerce</p>
+    <a href="../../index.html">⬅ Back to Main WT Page</a>
+  </footer>
 
 </body>
+
 </html>
