@@ -1,82 +1,220 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Technology Lab</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
 
-   <header class="top-header">
-    <h1>Web Technology <span>Lab</span></h1>
-    <p>Web Technologies Course</p>
-    <p><b>Submitted To:</b> Junaid Rasool Sir</p>
-
-    <p><b>Name:</b> Adithya Gowda</p>
-    <p><b>USN:</b> 24BTRCN001</p>
-    <p><b>Class:</b> CSE GEN A</p>
-
-    <p class="funny-line">"I build websites... and break them also 😅"</p>
-
-</header>
-
-
-
-    <div class="container">
-
-        <h2> Experiments</h2>
-
-        <div class="grid">
-
-            <div class="box">
-                <h3>Experiment 1</h3>
-                <p>HTML Portfolio (Only HTML)</p>
-                <a href="Experiments/Exp_1_HTML_Portfolio/index.html">Open</a>
-            </div>
-
-            <div class="box">
-                <h3>Experiment 2</h3>
-                <p>Portfolio using HTML + CSS</p>
-                <a href="Experiments/Exp_2_HTML_CSS_Portfolio/index.html">Open</a>
-            </div>
-
-            <div class="box">
-                <h3>Experiment 3</h3>
-                <p>E-Commerce Website (Only HTML)</p>
-                <a href="Experiments/Exp_3_HTML_Ecommerce/index.html">Open</a>
-            </div>
-
-            <div class="box">
-                <h3>Experiment 4</h3>
-                <p>E-Commerce Website using HTML + CSS</p>
-                <a href="Experiments/Exp_4_HTML_CSS_Ecommerce/index.html">Open</a>
-            </div>
-
-        </div>
-
-        <h2> Projects</h2>
-
-        <div class="grid">
-
-           
-
-            <div class="box">
-                <h3>Daredevil</h3>
-                <p>Dark Theme Web Project</p>
-                <a href="Projects/Daredevil/index.html">Open</a>
-            </div>
-
-            <div class="box">
-                <h3>Sadhu</h3>
-                <p>Creative Web Project</p>
-                <a href="Projects/Sadhu/index.html">Open</a>
-            </div>
-
-        </div>
-
+    <!-- Animated Background -->
+    <div class="bg-grid"></div>
+    <div class="scan-line"></div>
+    <div class="particles">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
     </div>
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+
+    <header class="top-header">
+        <div class="header-frame">
+            <div class="header-glitch" data-text="Web Technology Lab">Web Technology Lab</div>
+            <h1>WEB TECHNOLOGY <span>LAB</span></h1>
+            <div class="divider">
+                <span class="divider-line"></span>
+                <span class="divider-diamond"></span>
+                <span class="divider-line"></span>
+            </div>
+            <p class="subtitle">Web Technologies Course</p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="label">SUBMITTED TO</span>
+                    <span class="value">Junaid Rasool Sir</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">NAME</span>
+                    <span class="value">Adithya Gowda</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">USN</span>
+                    <span class="value">24BTRCN001</span>
+                </div>
+                <div class="info-item">
+                    <span class="label">CLASS</span>
+                    <span class="value">CSE GEN A</span>
+                </div>
+            </div>
+
+            <p class="funny-line">
+                <span class="quote-mark">"</span>
+                I build websites... and break them also
+                <span class="quote-mark">"</span>
+                <span class="cursor"></span>
+            </p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="section-block">
+            <h2 class="section-title">
+                <span class="title-decor">//</span>
+                EXPERIMENTS
+                <span class="title-number">04</span>
+            </h2>
+
+            <div class="grid">
+                <div class="box">
+                    <div class="box-number">01</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3>Experiment 1</h3>
+                    <p>HTML Portfolio constructed with pure semantic markup and structural elements</p>
+                    <a href="Experiments/Exp_1_HTML_Portfolio/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                </div>
+
+                <div class="box">
+                    <div class="box-number">02</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18M9 21V9"/>
+                        </svg>
+                    </div>
+                    <h3>Experiment 2</h3>
+                    <p>Portfolio enhanced with cascading stylesheets for visual presentation</p>
+                    <a href="Experiments/Exp_2_HTML_CSS_Portfolio/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                </div>
+
+                <div class="box">
+                    <div class="box-number">03</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/>
+                        </svg>
+                    </div>
+                    <h3>Experiment 3</h3>
+                    <p>E-Commerce platform structure built with foundational HTML elements</p>
+                    <a href="Experiments/Exp_3_HTML_Ecommerce/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                </div>
+
+                <div class="box">
+                    <div class="box-number">04</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Experiment 4</h3>
+                    <p>E-Commerce website styled with advanced CSS techniques and layouts</p>
+                    <a href="Experiments/Exp_4_HTML_CSS_Ecommerce/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-block">
+            <h2 class="section-title">
+                <span class="title-decor">//</span>
+                PROJECTS
+                <span class="title-number">02</span>
+            </h2>
+
+            <div class="grid">
+                <div class="box featured">
+                    <div class="box-number">01</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2z"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Daredevil</h3>
+                    <p>Immersive dark theme web project with cinematic visual design language</p>
+                    <a href="Projects/Daredevil/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                    <div class="featured-badge">FEATURED</div>
+                </div>
+
+                <div class="box">
+                    <div class="box-number">02</div>
+                    <div class="box-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Sadhu</h3>
+                    <p>Creative web project exploring unique design paradigms and interactions</p>
+                    <a href="Projects/Sadhu/index.html">
+                        <span>INITIALIZE</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <div class="box-glow"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <footer class="footer">
-        <p>© 2026 Adithya Gowda | Web Technology Lab</p>
+        <div class="footer-content">
+            <div class="footer-line"></div>
+            <p>
+                <span class="copyright-symbol">&copy;</span>
+                <span class="year">2026</span>
+                <span class="separator">|</span>
+                <span class="author">Adithya Gowda</span>
+                <span class="separator">|</span>
+                <span class="lab-name">Web Technology Lab</span>
+            </p>
+            <div class="footer-status">
+                <span class="status-dot"></span>
+                <span>SYSTEM ONLINE</span>
+            </div>
+        </div>
     </footer>
 
 </body>
