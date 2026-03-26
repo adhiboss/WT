@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dashboard | Experiment 9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0c1220 0%, #1a2332 50%, #0d1b2a 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 0;
+        }
+
+        /* Header */
+        .dashboard-header {
+            text-align: center;
+            padding: 48px 24px 32px;
+        }
+
+        .dashboard-header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+        }
+
+        .dashboard-header h1 span {
+            color: #3b82f6;
+        }
+
+        /* Tab Buttons */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            padding: 10px 28px;
+            border: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-btn.active {
+            background: #3b82f6;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+        }
+
+        .tab-btn:not(.active) {
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+        }
+
+        .tab-btn:not(.active):hover {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 0 24px 32px;
+        }
+
+        .controls input[type="text"] {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            width: 220px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .controls input[type="text"]:focus {
+            border-color: #3b82f6;
+        }
+
+        .controls input[type="text"]::placeholder {
+            color: #64748b;
+        }
+
+        .controls select {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .controls select option {
+            background: #1a2332;
+            color: #fff;
+        }
+
+        .control-btn {
+            padding: 10px 22px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-sort {
+            background: #3b82f6;
+            color: #fff;
+        }
+
+        .btn-sort:hover {
+            background: #60a5fa;
+        }
+
+        .btn-reset {
+            background: rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        /* Table Container */
+        .table-container {
+            padding: 0 24px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .data-panel {
+            display: none;
+        }
+
+        .data-panel.active {
+            display: block;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .styled-table thead th {
+            background: linear-gradient(135deg, #1e3a5f, #0c2d4d);
+            color: #60a5fa;
+            padding: 16px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            border-bottom: 2px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .styled-table tbody td {
+            padding: 14px 20px;
+            font-size: 14px;
+            text-align: center;
+            color: #e2e8f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(15, 23, 42, 0.6);
+            transition: background 0.2s;
+        }
+
+        .styled-table tbody tr:hover td {
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .styled-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Rating Stars */
+        .stars {
+            color: #fbbf24;
+            letter-spacing: 2px;
+        }
+
+        /* Price Tag */
+        .price {
+            font-weight: 700;
+            color: #34d399;
+        }
+
+        /* Marks Badge */
+        .marks-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .marks-high {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        .marks-mid {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+        }
+
+        .marks-low {
+            background: rgba(248, 113, 113, 0.15);
+            color: #f87171;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 0 24px 32px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 20px 28px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .stat-card .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #3b82f6;
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #3b82f6;
+        }
+
+        @media (max-width: 768px) {
+            .styled-table thead th,
+            .styled-table tbody td {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .controls input[type="text"] {
+                width: 100%;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-header">
+        <h1>Interactive <span>Student & Market</span> Dashboard</h1>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('students')" id="tabStudents">Students</button>
+        <button class="tab-btn" onclick="switchTab('products')" id="tabProducts">Market Products</button>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar">
+        <div class="stat-card">
+            <div class="stat-value" id="statTotal">10</div>
+            <div class="stat-label">Total Records</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="statAvg">81.7</div>
+            <div class="stat-label">Avg Marks</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="statTop">95</div>
+            <div class="stat-label">Highest</div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls" id="studentControls">
+        <input type="text" placeholder="🔍 Search student name" id="searchStudent" oninput="filterStudents()">
+        <select id="filterDept" onchange="filterStudents()">
+            <option value="">All Departments</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="ME">ME</option>
+            <option value="IT">IT</option>
+        </select>
+        <button class="control-btn btn-sort" onclick="sortByMarks()">Sort by Marks</button>
+        <button class="control-btn btn-reset" onclick="resetStudents()">Reset</button>
+    </div>
+
+    <div class="controls" id="productControls" style="display:none;">
+        <input type="text" placeholder="🔍 Search product" id="searchProduct" oninput="filterProducts()">
+        <select id="filterCategory" onchange="filterProducts()">
+            <option value="">All Categories</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Wearables">Wearables</option>
+            <option value="Home">Home</option>
+        </select>
+        <button class="control-btn btn-sort" onclick="sortByPrice()">Sort by Price</button>
+        <button class="control-btn btn-reset" onclick="resetProducts()">Reset</button>
+    </div>
+
+    <!-- Tables -->
+    <div class="table-container">
+        <div class="data-panel active" id="studentPanel">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Department</th>
+                        <th>Course</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+            </table>
+        </div>
+
+        <div class="data-panel" id="productPanel">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <a href="../../index.html" class="back-link">← Back to Lab Home</a>
+
+    <script>
+        // Student Data
+        const studentsOriginal = [
+            { name: 'Rahul', age: 20, dept: 'CSE', course: 'AI', marks: 85 },
+            { name: 'Priya', age: 21, dept: 'ECE', course: 'Robotics', marks: 78 },
+            { name: 'Amit', age: 22, dept: 'CSE', course: 'Data Science', marks: 92 },
+            { name: 'Sneha', age: 20, dept: 'ME', course: 'Thermo', marks: 66 },
+            { name: 'Karan', age: 23, dept: 'CSE', course: 'AI', marks: 88 },
+            { name: 'Anjali', age: 21, dept: 'EEE', course: 'Power', marks: 72 },
+            { name: 'Rohit', age: 20, dept: 'CSE', course: 'Cyber', marks: 81 },
+            { name: 'Neha', age: 22, dept: 'ECE', course: 'VLSI', marks: 76 },
+            { name: 'Vikram', age: 23, dept: 'CSE', course: 'Data Science', marks: 95 },
+            { name: 'Pooja', age: 21, dept: 'IT', course: 'Cloud', marks: 84 }
+        ];
+
+        // Product Data
+        const productsOriginal = [
+            { name: 'Wireless Earbuds', category: 'Electronics', price: 2999, rating: 4.5, stock: 120 },
+            { name: 'Smart Watch Pro', category: 'Wearables', price: 5999, rating: 4.2, stock: 85 },
+            { name: 'Phone Case Premium', category: 'Accessories', price: 599, rating: 3.8, stock: 300 },
+            { name: 'Bluetooth Speaker', category: 'Electronics', price: 1499, rating: 4.7, stock: 95 },
+            { name: 'Fitness Band', category: 'Wearables', price: 1999, rating: 4.0, stock: 150 },
+            { name: 'USB-C Hub', category: 'Accessories', price: 899, rating: 4.3, stock: 200 },
+            { name: 'Smart LED Bulb', category: 'Home', price: 799, rating: 4.1, stock: 250 },
+            { name: 'Gaming Mouse', category: 'Electronics', price: 1299, rating: 4.6, stock: 110 },
+            { name: 'Laptop Stand', category: 'Accessories', price: 1599, rating: 4.4, stock: 75 },
+            { name: 'Air Purifier Mini', category: 'Home', price: 3499, rating: 4.0, stock: 60 }
+        ];
+
+        let students = [...studentsOriginal];
+        let products = [...productsOriginal];
+        let sortStudentAsc = true;
+        let sortProductAsc = true;
+        let currentTab = 'students';
+
+        function renderStudents() {
+            const tbody = document.getElementById('studentTable');
+            tbody.innerHTML = '';
+            students.forEach(s => {
+                let badgeClass = s.marks >= 85 ? 'marks-high' : s.marks >= 70 ? 'marks-mid' : 'marks-low';
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${s.name}</td>
+                        <td>${s.age}</td>
+                        <td>${s.dept}</td>
+                        <td>${s.course}</td>
+                        <td><span class="marks-badge ${badgeClass}">${s.marks}</span></td>
+                    </tr>
+                `;
+            });
+            updateStats();
+        }
+
+        function renderProducts() {
+            const tbody = document.getElementById('productTable');
+            tbody.innerHTML = '';
+            products.forEach(p => {
+                let stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 ? '½' : '') + '☆'.repeat(5 - Math.ceil(p.rating));
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.category}</td>
+                        <td class="price">₹${p.price.toLocaleString()}</td>
+                        <td><span class="stars">${stars}</span> ${p.rating}</td>
+                        <td>${p.stock}</td>
+                    </tr>
+                `;
+            });
+            updateProductStats();
+        }
+
+        function updateStats() {
+            document.getElementById('statTotal').textContent = students.length;
+            if (students.length > 0) {
+                const avg = (students.reduce((a, s) => a + s.marks, 0) / students.length).toFixed(1);
+                const top = Math.max(...students.map(s => s.marks));
+                document.getElementById('statAvg').textContent = avg;
+                document.getElementById('statTop').textContent = top;
+            } else {
+                document.getElementById('statAvg').textContent = '—';
+                document.getElementById('statTop').textContent = '—';
+            }
+        }
+
+        function updateProductStats() {
+            document.getElementById('statTotal').textContent = products.length;
+            if (products.length > 0) {
+                const avg = (products.reduce((a, p) => a + p.price, 0) / products.length).toFixed(0);
+                const top = Math.max(...products.map(p => p.price));
+                document.getElementById('statAvg').textContent = '₹' + parseInt(avg).toLocaleString();
+                document.getElementById('statTop').textContent = '₹' + top.toLocaleString();
+            }
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.getElementById('tabStudents').classList.toggle('active', tab === 'students');
+            document.getElementById('tabProducts').classList.toggle('active', tab === 'products');
+            document.getElementById('studentPanel').classList.toggle('active', tab === 'students');
+            document.getElementById('productPanel').classList.toggle('active', tab === 'products');
+            document.getElementById('studentControls').style.display = tab === 'students' ? 'flex' : 'none';
+            document.getElementById('productControls').style.display = tab === 'products' ? 'flex' : 'none';
+
+            if (tab === 'students') {
+                updateStats();
+            } else {
+                updateProductStats();
+            }
+        }
+
+        function filterStudents() {
+            const search = document.getElementById('searchStudent').value.toLowerCase();
+            const dept = document.getElementById('filterDept').value;
+            students = studentsOriginal.filter(s => {
+                const matchName = s.name.toLowerCase().includes(search);
+                const matchDept = dept === '' || s.dept === dept;
+                return matchName && matchDept;
+            });
+            renderStudents();
+        }
+
+        function filterProducts() {
+            const search = document.getElementById('searchProduct').value.toLowerCase();
+            const cat = document.getElementById('filterCategory').value;
+            products = productsOriginal.filter(p => {
+                const matchName = p.name.toLowerCase().includes(search);
+                const matchCat = cat === '' || p.category === cat;
+                return matchName && matchCat;
+            });
+            renderProducts();
+        }
+
+        function sortByMarks() {
+            students.sort((a, b) => sortStudentAsc ? a.marks - b.marks : b.marks - a.marks);
+            sortStudentAsc = !sortStudentAsc;
+            renderStudents();
+        }
+
+        function sortByPrice() {
+            products.sort((a, b) => sortProductAsc ? a.price - b.price : b.price - a.price);
+            sortProductAsc = !sortProductAsc;
+            renderProducts();
+        }
+
+        function resetStudents() {
+            document.getElementById('searchStudent').value = '';
+            document.getElementById('filterDept').value = '';
+            students = [...studentsOriginal];
+            sortStudentAsc = true;
+            renderStudents();
+        }
+
+        function resetProducts() {
+            document.getElementById('searchProduct').value = '';
+            document.getElementById('filterCategory').value = '';
+            products = [...productsOriginal];
+            sortProductAsc = true;
+            renderProducts();
+        }
+
+        // Initial render
+        renderStudents();
+        renderProducts();
+    </script>
+
+</body>
+</html>

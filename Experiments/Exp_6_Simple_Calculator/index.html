@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator | Experiment 6</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .page-title {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .calculator {
+            background: #1e1e2e;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 32px;
+            width: 360px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(99, 102, 241, 0.05);
+        }
+
+        .display {
+            background: #111827;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            text-align: right;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .display .expression {
+            font-size: 16px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            min-height: 24px;
+            word-break: break-all;
+        }
+
+        .display .result {
+            font-family: 'Outfit', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .btn {
+            height: 64px;
+            border: none;
+            border-radius: 14px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0);
+            transition: background 0.2s;
+        }
+
+        .btn:active::after {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-number {
+            background: #374151;
+            color: #fff;
+        }
+
+        .btn-number:hover {
+            background: #4b5563;
+        }
+
+        .btn-operator {
+            background: #6366f1;
+            color: #fff;
+        }
+
+        .btn-operator:hover {
+            background: #818cf8;
+        }
+
+        .btn-action {
+            background: #1f2937;
+            color: #f87171;
+        }
+
+        .btn-action:hover {
+            background: #374151;
+        }
+
+        .btn-equals {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            grid-column: span 2;
+        }
+
+        .btn-equals:hover {
+            background: linear-gradient(135deg, #34d399, #10b981);
+        }
+
+        .btn-zero {
+            grid-column: span 2;
+        }
+
+        .back-link {
+            margin-top: 32px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #6366f1;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="page-title">🧮 Simple Calculator</h1>
+    <p class="page-subtitle">Experiment 6 — Basic Operations</p>
+
+    <div class="calculator">
+        <div class="display">
+            <div class="expression" id="expression"></div>
+            <div class="result" id="result">0</div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-action" onclick="clearAll()">AC</button>
+            <button class="btn btn-action" onclick="deleteLast()">⌫</button>
+            <button class="btn btn-operator" onclick="appendOp('%')">%</button>
+            <button class="btn btn-operator" onclick="appendOp('/')">÷</button>
+
+            <button class="btn btn-number" onclick="appendNum('7')">7</button>
+            <button class="btn btn-number" onclick="appendNum('8')">8</button>
+            <button class="btn btn-number" onclick="appendNum('9')">9</button>
+            <button class="btn btn-operator" onclick="appendOp('*')">×</button>
+
+            <button class="btn btn-number" onclick="appendNum('4')">4</button>
+            <button class="btn btn-number" onclick="appendNum('5')">5</button>
+            <button class="btn btn-number" onclick="appendNum('6')">6</button>
+            <button class="btn btn-operator" onclick="appendOp('-')">−</button>
+
+            <button class="btn btn-number" onclick="appendNum('1')">1</button>
+            <button class="btn btn-number" onclick="appendNum('2')">2</button>
+            <button class="btn btn-number" onclick="appendNum('3')">3</button>
+            <button class="btn btn-operator" onclick="appendOp('+')">+</button>
+
+            <button class="btn btn-number btn-zero" onclick="appendNum('0')">0</button>
+            <button class="btn btn-number" onclick="appendNum('.')">.</button>
+            <button class="btn btn-equals" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <a href="../../index.html" class="back-link">← Back to Lab Home</a>
+
+    <script>
+        let currentInput = '';
+        let expression = '';
+
+        function updateDisplay() {
+            document.getElementById('result').textContent = currentInput || '0';
+            document.getElementById('expression').textContent = expression;
+        }
+
+        function appendNum(num) {
+            if (num === '.' && currentInput.includes('.')) return;
+            currentInput += num;
+            updateDisplay();
+        }
+
+        function appendOp(op) {
+            if (currentInput === '' && expression === '') return;
+            if (currentInput !== '') {
+                expression += currentInput + ' ' + op + ' ';
+                currentInput = '';
+            } else {
+                // Replace last operator
+                expression = expression.trim().slice(0, -1) + op + ' ';
+            }
+            updateDisplay();
+        }
+
+        function calculate() {
+            if (currentInput === '' && expression === '') return;
+            let fullExpression = expression + currentInput;
+            try {
+                let result = Function('"use strict"; return (' + fullExpression + ')')();
+                if (isNaN(result) || !isFinite(result)) {
+                    currentInput = 'Error';
+                } else {
+                    expression = fullExpression + ' =';
+                    currentInput = parseFloat(result.toFixed(8)).toString();
+                }
+            } catch (e) {
+                currentInput = 'Error';
+            }
+            updateDisplay();
+            expression = '';
+        }
+
+        function clearAll() {
+            currentInput = '';
+            expression = '';
+            updateDisplay();
+        }
+
+        function deleteLast() {
+            currentInput = currentInput.slice(0, -1);
+            updateDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') appendNum(e.key);
+            else if (e.key === '.') appendNum('.');
+            else if (e.key === '+') appendOp('+');
+            else if (e.key === '-') appendOp('-');
+            else if (e.key === '*') appendOp('*');
+            else if (e.key === '/') { e.preventDefault(); appendOp('/'); }
+            else if (e.key === '%') appendOp('%');
+            else if (e.key === 'Enter' || e.key === '=') calculate();
+            else if (e.key === 'Backspace') deleteLast();
+            else if (e.key === 'Escape') clearAll();
+        });
+    </script>
+
+</body>
+</html>

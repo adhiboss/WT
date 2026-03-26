@@ -4,30 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adhizone 🛒 - Cart</title>
+  <meta name="description" content="Your shopping cart at Adhizone.">
   <link rel="icon" type="image/png" href="logo (2).png">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header>
-  <div class="logo">AmazonClone</div>
+  <div class="logo">
+    <img src="logo (2).png" alt="Adhizone Logo">
+    <span class="logo-text">Adhi<span>zone</span></span>
+  </div>
 
   <div class="search-bar">
-    <input type="text" placeholder="Search Cart Items...">
+    <input type="text" placeholder="Search cart items...">
     <button>Search</button>
   </div>
 
   <nav>
     <a href="index.html">Home</a>
     <a href="products.html">Products</a>
-    <a href="cart.html">Cart</a>
+    <a href="cart.html" class="active">🛒 Cart</a>
     <a href="contact.html">Contact</a>
   </nav>
 </header>
 
 <div class="cart-container">
-  <h2>Your Shopping Cart</h2>
+  <h2>🛒 Your Shopping Cart</h2>
 
   <table>
     <tr>
@@ -36,31 +41,28 @@
       <th>Quantity</th>
       <th>Total</th>
     </tr>
-
     <tr>
       <td>Wireless Headphones</td>
-      <td>₹1999</td>
+      <td>₹1,999</td>
       <td>1</td>
-      <td>₹1999</td>
+      <td>₹1,999</td>
     </tr>
-
     <tr>
       <td>Smart Watch</td>
-      <td>₹2499</td>
+      <td>₹2,499</td>
       <td>1</td>
-      <td>₹2499</td>
+      <td>₹2,499</td>
     </tr>
   </table>
 
-  <p class="total">Grand Total: ₹4498</p>
+  <p class="total">Grand Total: ₹4,498</p>
 
-  <button class="checkout-btn">Proceed to Checkout</button>
+  <button class="checkout-btn">✓ Proceed to Checkout</button>
 </div>
 
 <footer>
-  <p>© 2026 AmazonClone | Made by Adhi</p>
+  <p>© 2026 <span>Adhizone</span> | Made with ❤️ by Adhi</p>
 </footer>
 
 </body>
 </html>
-
