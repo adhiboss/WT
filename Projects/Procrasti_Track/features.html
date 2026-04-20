@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Features — ProcrastiTrack</title>
+<meta name="description" content="Every gamified feature designed to fight procrastination — XP, streaks, leaderboard, and classroom sync.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><span class="owl-icon">🦉</span>Procrasti<em>Track</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html" class="active">Features</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html" class="nav-cta">Login</a></li>
+  </ul>
+</nav>
+<div class="page">
+  <section class="hero" style="padding-bottom:2rem">
+    <div class="badge-pill fade-up">✨ Everything you get</div>
+    <h1 class="fade-up d1">Features designed<br><span class="hl">to make you unstoppable</span></h1>
+    <p class="subtitle fade-up d2">From Google Classroom sync to XP rewards — every tool exists to turn studying into an adventure.</p>
+  </section>
+
+  <!-- SKILL UNLOCK GRID -->
+  <div class="section" style="padding-top:0">
+    <div class="section-header">
+      <span class="badge-pill">🗝️ Skill Unlocks</span>
+      <h2 style="margin-top:1rem">Your gamification arsenal</h2>
+      <p>Each feature is a skill you unlock as you level up. The more you use the app, the more powerful you become.</p>
+    </div>
+
+    <div class="card-grid" style="padding:0;margin-bottom:3rem">
+      <div class="duo-card fade-up">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">⚡</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>XP System</h3>
+          <span class="xp-pill">Lv.1 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">Earn XP for every task. On-time = bonus XP. Early submission = double XP. Even late submissions earn some points — every bit counts.</p>
+        <div style="margin-top:1rem;background:var(--green-lt);border-radius:var(--radius-sm);padding:.75rem;font-size:.85rem;font-weight:700;color:var(--green-dk)">
+          🎯 Early: ×2 XP &nbsp;·&nbsp; On time: ×1 XP &nbsp;·&nbsp; Late: ×0.5 XP
+        </div>
+      </div>
+
+      <div class="duo-card gold fade-up d1">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🔥</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>Daily Streaks</h3>
+          <span class="xp-pill">Lv.1 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">Complete at least one task every day to grow your streak. Your streak is displayed to the whole class — so losing it hurts. That's the point.</p>
+        <div style="margin-top:1rem">
+          <div class="week-grid" id="featStreakDots"></div>
+        </div>
+      </div>
+
+      <div class="duo-card red fade-up d2">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">❤️</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>Hearts System</h3>
+          <span class="xp-pill">Lv.2 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">You start with 5 hearts. Miss a task and you lose one. Run out and Duo gets really sad. Refill by completing bonus challenges or waiting 24h.</p>
+        <div style="margin-top:1rem">
+          <div class="hearts-display" id="featHearts"></div>
+        </div>
+      </div>
+
+      <div class="duo-card blue fade-up d3">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🏆</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>Leaderboard</h3>
+          <span class="xp-pill">Lv.3 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">Real-time class XP ranking. Everyone sees everyone's score. Social pressure is a proven motivator. Where do you stand?</p>
+        <div style="margin-top:1rem" id="featLeaderboard"></div>
+      </div>
+
+      <div class="duo-card purple fade-up">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🎖️</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>Achievement Badges</h3>
+          <span class="xp-pill">Lv.1 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">22 unlockable badges from "Early Bird" to "Perfect Week". Earn them by hitting milestones and show them off on your profile.</p>
+        <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.4rem" id="featBadges"></div>
+      </div>
+
+      <div class="duo-card orange fade-up d1">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🔗</div>
+        <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem">
+          <h3>Classroom Sync</h3>
+          <span class="xp-pill">Lv.1 Unlock</span>
+        </div>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:500">OAuth 2.0 pulls every assignment from Google Classroom. New tasks appear within minutes. Zero manual entry. Read-only access, always.</p>
+        <div id="classroomPreview" style="margin-top:1rem"></div>
+        <button onclick="simulateSync()" id="syncFeatBtn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.75rem;font-size:.85rem">⟳ Simulate Sync</button>
+      </div>
+    </div>
+
+    <!-- OWL PRACTICE ROUND -->
+    <div style="background:var(--green-lt);border:2px solid var(--green);border-radius:var(--radius);padding:2rem;max-width:800px;margin:0 auto 3rem">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <span class="badge-pill">🦉 Owl Practice Round</span>
+        <h2 style="margin-top:1rem">Duo wants to check in!</h2>
+        <p style="color:var(--text2);font-weight:600;margin-top:.5rem">Roll a new message from Duo — just like a Duolingo reminder, but actually funny.</p>
+      </div>
+      <div id="practiceCard" class="card" style="text-align:center;padding:2rem;margin-bottom:1rem"></div>
+      <button onclick="rollOwlMessage()" class="btn btn-primary" id="roll-owl-btn" style="width:100%;justify-content:center;font-size:1rem">🎲 Get a new Duo message</button>
+    </div>
+
+    <!-- ANALYTICS SECTION -->
+    <div class="section-header">
+      <span class="badge-pill">📊 Analytics</span>
+      <h2 style="margin-top:1rem">See your patterns. Break bad habits.</h2>
+    </div>
+    <div class="card-grid" style="padding:0">
+      <div class="duo-card fade-up">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📈</div>
+        <h3>Weekly Reports</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-top:.5rem;font-weight:500">See tasks completed, on-time %, and XP trend over the week. Delivered to your dashboard every Monday.</p>
+      </div>
+      <div class="duo-card gold fade-up d1">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">⏰</div>
+        <h3>Deadline Heatmap</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-top:.5rem;font-weight:500">Visualize your busiest weeks before they hit. Avoid the panic-zone by planning ahead with the visual calendar.</p>
+      </div>
+      <div class="duo-card blue fade-up d2">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🎯</div>
+        <h3>Subject Breakdown</h3>
+        <p style="color:var(--text2);font-size:.9rem;margin-top:.5rem;font-weight:500">Which subject are you most behind in? ProcrastiTrack knows. The data will both shock and motivate you.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:2rem 2rem 5rem">
+    <div style="font-size:3rem;margin-bottom:.75rem">🦉</div>
+    <h2 style="margin-bottom:1rem">All features are free for students</h2>
+    <p style="color:var(--text2);margin-bottom:2rem;font-weight:600">No paywalls. No ads. Just gamified productivity.</p>
+    <a href="login.html" id="features-cta-btn" class="btn btn-primary" style="font-size:1rem;padding:14px 36px">Get started free →</a>
+  </div>
+</div>
+
+<div id="memeToast">
+  <span class="meme-emoji-big" id="mEmo"></span>
+  <div style="font-weight:800;font-size:.95rem;margin-bottom:.25rem" id="mTitle"></div>
+  <div class="meme-text" id="mSub"></div>
+  <div class="meme-text" id="mTask" style="color:var(--green-dk);font-size:.8rem"></div>
+  <button class="meme-close-btn" onclick="closeMeme()">Got it! Let's go 🚀</button>
+</div>
+<footer><p>🦉 © 2025 ProcrastiTrack · <a href="contact.html">Contact</a> · <a href="index.html">Home</a></p></footer>
+
+<script src="app.js"></script>
+<script>
+const OWL_MESSAGES = [
+  {e:'🦉',t:"Hoot hoot! 🎉",s:"Duo is proud of you for exploring the features! Now actually USE them."},
+  {e:'🦉',t:"Duo has been watching...",s:"Your leaderboard position is slipping. Time to complete some tasks!"},
+  {e:'🦉',t:"You're almost at Level 8!",s:"Just 260 more XP. Complete 3 tasks and you'll get there today!"},
+  {e:'🦉',t:"Streak danger! 🔥",s:"Complete a task before midnight or your 5-day streak disappears forever."},
+  {e:'🦉',t:"Early bird bonus! 🌅",s:"Submit before the deadline for ×2 XP. Duo rewards the early birds."},
+];
+const sampleAssignments = [
+  {course:"Math 101",title:"Chapter 6 Exercises",due:"Tomorrow",status:"upcoming"},
+  {course:"Biology",title:"Cell division report",due:"In 3 days",status:"upcoming"},
+  {course:"English Lit",title:"Essay draft",due:"Overdue",status:"overdue"},
+  {course:"Chemistry",title:"Lab report",due:"Today",status:"today"},
+];
+
+function renderClassroomPreview(){
+  document.getElementById('classroomPreview').innerHTML = sampleAssignments.map(a=>`
+    <div style="display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:1px solid var(--border)">
+      <div style="flex:1"><div style="font-size:.875rem;font-weight:700">${a.title}</div>
+        <div style="font-size:.75rem;color:var(--text2);font-weight:600">${a.course}</div></div>
+      <span class="pill pill-${a.status==='overdue'?'red':a.status==='today'?'gold':'green'}">${a.due}</span>
+    </div>`).join('');
+}
+
+function simulateSync(){
+  const btn=document.getElementById('syncFeatBtn');
+  btn.textContent='⟳ Syncing...'; btn.disabled=true;
+  setTimeout(()=>{
+    sampleAssignments.push({course:"History",title:"Essay outline",due:"In 5 days",status:"upcoming"});
+    renderClassroomPreview(); btn.textContent='✓ Synced! 5 loaded 🎉';
+    setTimeout(()=>{btn.textContent='⟳ Simulate Sync';btn.disabled=false;},2000);
+  },1500);
+}
+
+function rollOwlMessage(){
+  const m=OWL_MESSAGES[Math.floor(Math.random()*OWL_MESSAGES.length)];
+  document.getElementById('practiceCard').innerHTML=`
+    <div style="font-size:3.5rem;margin-bottom:1rem">${m.e}</div>
+    <h3 style="margin-bottom:.5rem">${m.t}</h3>
+    <p style="color:var(--text2);font-weight:600">${m.s}</p>`;
+  confettiBurst(window.innerWidth/2, document.getElementById('practiceCard').getBoundingClientRect().top);
+}
+
+// Render features sidebar items
+function renderFeatHearts(){
+  const hd=document.getElementById('featHearts'); if(!hd) return;
+  for(let i=0;i<5;i++){
+    const h=document.createElement('span');
+    h.className='heart'+(i>=4?' lost':''); h.style.fontSize='1.4rem'; h.textContent='❤️'; hd.appendChild(h);
+  }
+}
+function renderFeatStreak(){
+  const days=['M','T','W','T','F','S','S'],done=[true,true,true,true,true,false,false];
+  document.getElementById('featStreakDots').innerHTML=days.map((d,i)=>
+    `<div class="week-dot ${done[i]?'done':''}">${d}<span style="font-size:.9rem">${done[i]?'🔥':'·'}</span></div>`).join('');
+}
+function renderFeatLeaderboard(){
+  const leaders=[{n:"Priya S.",xp:2840},{n:"Ravi K.",xp:2210},{n:"You",xp:1240,you:true}];
+  document.getElementById('featLeaderboard').innerHTML=leaders.map((p,i)=>`
+    <div class="lb-row">
+      <div class="lb-rank">${i===0?'🥇':i===1?'🥈':'🥉'}</div>
+      <div class="lb-name${p.you?'" style="color:var(--green);font-weight:900"':'"'}>${p.n}</div>
+      <div class="lb-xp">${p.xp.toLocaleString()}</div>
+    </div>`).join('');
+}
+function renderFeatBadges(){
+  const items=[{e:'⚡',l:false},{e:'🔥',l:false},{e:'🚀',l:false},{e:'🏆',l:true},{e:'🧠',l:true},{e:'💎',l:true}];
+  document.getElementById('featBadges').innerHTML=items.map(b=>
+    `<div class="badge-item${b.l?' locked':''}" title="${b.l?'Locked':'Unlocked'}">${b.e}</div>`).join('');
+}
+
+window.addEventListener('load',()=>{
+  renderClassroomPreview(); rollOwlMessage();
+  renderFeatHearts(); renderFeatStreak(); renderFeatLeaderboard(); renderFeatBadges();
+});
+</script>
+</body></html>

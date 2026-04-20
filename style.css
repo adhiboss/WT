@@ -568,6 +568,51 @@ body {
 }
 
 /* ============================================
+   EXPERIMENT CATEGORY HEADERS
+   ============================================ */
+.exp-category-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    max-width: 1200px;
+    margin: 64px auto 16px;
+    padding: 0 4px;
+}
+
+.exp-cat-emoji {
+    font-size: 28px;
+    line-height: 1;
+}
+
+.exp-cat-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    white-space: nowrap;
+}
+
+.exp-cat-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, rgba(229, 9, 20, 0.6), transparent);
+    border-radius: 2px;
+}
+
+.exp-cat-line--css {
+    background: linear-gradient(to right, rgba(139, 92, 246, 0.7), transparent);
+}
+
+.exp-cat-line--js {
+    background: linear-gradient(to right, rgba(234, 179, 8, 0.7), transparent);
+}
+
+.exp-cat-line--php {
+    background: linear-gradient(to right, rgba(34, 197, 94, 0.7), transparent);
+}
+
+/* ============================================
    EXPERIMENT CARDS - LIST STYLE
    ============================================ */
 .experiment-grid {

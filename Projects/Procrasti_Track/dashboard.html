@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard — ProcrastiTrack</title>
+<meta name="description" content="Your gamified student dashboard. Track tasks, earn XP, maintain streaks, and compete on the leaderboard.">
+<link rel="stylesheet" href="style.css">
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+.sidebar { width:300px; flex-shrink:0; }
+.main-area { flex:1; min-width:0; }
+.dash-top { display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1.5rem; }
+/* Level badge */
+.level-badge {
+  width:52px; height:52px; border-radius:50%;
+  background:var(--green); border:3px solid var(--green-dk);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:900; font-size:1.1rem; color:#fff;
+  box-shadow:0 4px 0 var(--green-dk); flex-shrink:0;
+}
+/* Lesson button (big task card) */
+.lesson-btn {
+  display:flex; align-items:center; gap:1rem;
+  background:#fff; border:2px solid var(--border);
+  border-left:5px solid var(--green);
+  border-radius:var(--radius); padding:1rem 1.25rem;
+  cursor:pointer; transition:all .15s;
+  width:100%; text-align:left; font-family:'Nunito',sans-serif;
+  margin-bottom:.625rem; position:relative; overflow:hidden;
+}
+.lesson-btn:hover { border-color:var(--green); background:var(--green-lt); transform:translateX(4px); }
+.lesson-btn.overdue { border-left-color:var(--red); }
+.lesson-btn.overdue:hover { background:var(--red-lt); border-color:var(--red); }
+.lesson-btn.today-btn { border-left-color:var(--gold); }
+.lesson-btn.today-btn:hover { background:var(--gold-lt); border-color:var(--gold); }
+.lesson-btn.done-btn { border-left-color:var(--border2); opacity:.65; }
+.lesson-btn.done-btn .task-name { text-decoration:line-through; color:var(--text3); }
+.check-btn {
+  width:32px; height:32px; border-radius:50%;
+  border:2.5px solid var(--border2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.9rem; flex-shrink:0; transition:all .25s; font-weight:900; background:#fff;
+}
+.lesson-btn.done-btn .check-btn { background:var(--green); border-color:var(--green); color:#fff; }
+/* ── Classroom panel ── */
+.classroom-panel {
+  border:2px solid var(--green); border-radius:var(--radius);
+  overflow:hidden; margin-bottom:1rem;
+}
+.classroom-panel-header {
+  background:linear-gradient(135deg,#58CC02,#46A302);
+  padding:.875rem 1.25rem; display:flex; align-items:center; gap:.75rem;
+}
+.classroom-panel-header h3 { color:#fff; margin:0; }
+.classroom-panel-body { background:#fff; padding:1rem 1.25rem; }
+.gc-course-pill {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--green-lt); border:1.5px solid var(--green);
+  border-radius:99px; padding:3px 10px;
+  font-size:.72rem; font-weight:800; color:var(--green-dk);
+  margin:2px;
+}
+/* Google sign-in button */
+.btn-google-real {
+  background:#fff; color:#3c4043;
+  border:2px solid #dadce0; border-radius:var(--radius-sm);
+  padding:10px 18px; font-family:'Nunito',sans-serif;
+  font-weight:800; font-size:.88rem; cursor:pointer;
+  display:flex; align-items:center; gap:10px;
+  transition:box-shadow .2s; width:100%; justify-content:center;
+}
+.btn-google-real:hover { box-shadow:0 2px 10px rgba(0,0,0,.15); }
+/* Sync status banner */
+.sync-banner {
+  display:flex; align-items:center; gap:.625rem;
+  padding:.625rem 1rem; border-radius:var(--radius-sm);
+  font-size:.82rem; font-weight:700; margin-bottom:.75rem;
+}
+.sync-banner.connected { background:var(--green-lt); color:var(--green-dk); border:1.5px solid var(--green); }
+.sync-banner.error     { background:var(--red-lt);   color:var(--red);      border:1.5px solid var(--red); }
+.sync-banner.loading   { background:var(--blue-lt);  color:var(--blue);     border:1.5px solid var(--blue); }
+/* Shimmer loading */
+@keyframes shimmer {
+  0%   { background-position:-400px 0; }
+  100% { background-position:400px 0; }
+}
+.skeleton {
+  height:52px; border-radius:var(--radius-sm);
+  background: linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%);
+  background-size:800px 100%;
+  animation:shimmer 1.2s infinite; margin-bottom:.5rem;
+}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><span class="owl-icon">🦉</span>Procrasti<em>Track</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html" class="nav-cta">Login</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+<div id="envWarning" style="display:none;background:var(--red-lt);border:2px solid var(--red);padding:1rem;margin:1rem;border-radius:var(--radius-sm);color:var(--red);font-weight:800;text-align:center">
+  ⚠️ <strong>Local Server Required:</strong> Google Classroom Sync requires a local server. Please use VS Code "Live Server" to open this dashboard.
+</div>
+
+<div style="max-width:1100px;margin:0 auto;padding:1.75rem 2rem 4rem">
+
+  <!-- TOP BAR -->
+  <div class="dash-top">
+    <div class="level-badge" id="levelBadge">7</div>
+    <div>
+      <div style="font-weight:900;font-size:1.2rem">Hey, Student 👋</div>
+      <div style="font-size:.85rem;color:var(--text2);font-weight:600">Deadline Dodger · Lv.7 · Keep going!</div>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:.625rem;align-items:center;flex-wrap:wrap">
+      <div class="hearts-display" id="heartsTopBar"></div>
+      <div class="streak-badge" id="streakBadge">🔥 5</div>
+      <div id="gcAccountBadge" style="display:none;align-items:center;gap:6px;background:var(--green-lt);border:1.5px solid var(--green);border-radius:99px;padding:5px 14px;font-size:.8rem;font-weight:800;color:var(--green-dk)"></div>
+      <button onclick="syncClassroom()" id="syncBtn" class="btn btn-secondary" style="font-size:.85rem">⟳ Sync Classroom</button>
+    </div>
+  </div>
+
+  <!-- XP PROGRESS -->
+  <div class="card" style="margin-bottom:1.25rem;padding:1rem 1.5rem">
+    <div style="display:flex;align-items:center;gap:1.5rem">
+      <div style="flex:1">
+        <div style="font-size:.78rem;font-weight:800;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.3rem">XP Progress — Level 7</div>
+        <div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:.4rem">
+          <span id="xpLabel">1,240 XP</span><span id="xpNext">260 XP to Level 8</span>
+        </div>
+        <div class="xp-bar-wrap" style="width:100%"><div class="xp-bar-fill" id="xpFill" style="width:0%"></div></div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div style="font-size:.75rem;color:var(--text2);font-weight:700">Today</div>
+        <div style="font-weight:900;font-size:1.4rem;color:var(--gold-dk)" id="todayXp">+80 ⚡</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1.5rem" id="statRow"></div>
+
+  <!-- MAIN LAYOUT -->
+  <div style="display:flex;gap:1.5rem" class="dash-layout">
+
+    <!-- TASKS -->
+    <div class="main-area">
+      <!-- Daily goal ring + filter -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem">
+        <div style="display:flex;align-items:center;gap:.75rem">
+          <div class="goal-ring-wrap">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+              <circle class="goal-ring-bg" cx="50" cy="50" r="45" fill="none" stroke="var(--border)" stroke-width="8"/>
+              <circle class="goal-ring-fill" id="goalRing" cx="50" cy="50" r="45"
+                fill="none" stroke="var(--green)" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="282.74" stroke-dashoffset="282.74" style="transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1s ease"/>
+            </svg>
+            <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center">
+              <div style="font-weight:900;font-size:1.1rem;color:var(--green)" id="goalDone">0</div>
+              <div style="font-size:.65rem;font-weight:800;color:var(--text2)">/ <span id="goalTotal">6</span></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-weight:900;font-size:1rem">Daily Goal</div>
+            <div style="font-size:.82rem;color:var(--text2);font-weight:600">Complete tasks to fill the ring!</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.4rem" id="filterGroup">
+          <button onclick="filterTasks('all')" class="btn btn-ghost" id="fAll" style="font-size:.8rem;padding:6px 14px">All</button>
+          <button onclick="filterTasks('overdue')" class="btn btn-ghost" id="fOver" style="font-size:.8rem;padding:6px 14px">Overdue</button>
+          <button onclick="filterTasks('pending')" class="btn btn-ghost" id="fPend" style="font-size:.8rem;padding:6px 14px">Pending</button>
+        </div>
+      </div>
+
+      <div id="taskContainer"></div>
+      <button onclick="addTaskModal()" class="btn btn-ghost" id="add-task-btn"
+        style="width:100%;justify-content:center;margin-top:.75rem;border-style:dashed;border-width:2px;font-size:.9rem">
+        + Add task manually
+      </button>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <!-- GOOGLE CLASSROOM PANEL -->
+      <div class="classroom-panel">
+        <div class="classroom-panel-header">
+           <svg width="22" height="22" viewBox="0 0 48 48" fill="none"><path d="M8 14C8 11.8 9.8 10 12 10H36C38.2 10 40 11.8 40 14V34C40 36.2 38.2 38 36 38H12C9.8 38 8 36.2 8 34V14Z" fill="white" fill-opacity="0.3"/><rect x="14" y="20" width="20" height="3" rx="1.5" fill="white"/><rect x="14" y="26" width="14" height="3" rx="1.5" fill="white"/><circle cx="24" cy="15" r="3" fill="white"/></svg>
+           <h3 style="color:#fff;font-size:1rem;margin:0">Google Classroom</h3>
+        </div>
+        <div class="classroom-panel-body">
+          <div id="classroomStatus"></div>
+          <div id="courseList" style="margin-bottom:.75rem;display:flex;flex-wrap:wrap;gap:4px"></div>
+          <button onclick="syncClassroom()" id="syncBtn2" class="btn-google-real">
+            <svg width="18" height="18" viewBox="0 0 48 48" style="margin-right:8px"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+            Sync Assignments
+          </button>
+        </div>
+      </div>
+
+      <!-- STREAK WEEK -->
+      <div class="card" style="margin-bottom:1.25rem">
+        <div style="font-weight:900;font-size:1.05rem;margin-bottom:.75rem">Weekly Streak</div>
+        <div id="weekDots" style="display:flex;gap:.5rem"></div>
+      </div>
+
+      <!-- FRESH MEMES SECTON -->
+      <div class="card" style="text-align:center; position:relative; margin-bottom:1.25rem;">
+        <div style="font-weight:900;font-size:1.05rem;margin-bottom:1rem;color:var(--green-dk)">Meme of the Moment 🚀</div>
+        <div class="meme-container" style="border-radius:var(--radius);overflow:hidden;border:2px solid var(--border);position:relative">
+          <img id="freshMemeImg" src="images/motivational_owl_meme_1776022064264.png" alt="Motivational Meme" style="width:100%;height:auto;display:block;transition:all 0.3s ease;">
+        </div>
+        <button onclick="nextMeme()" class="btn btn-secondary" style="margin-top:1rem;width:100%;justify-content:center">Give me another one 😂</button>
+      </div>
+
+      <!-- BADGES -->
+      <div class="card" style="margin-top:1.25rem">
+        <div style="font-weight:900;font-size:1.05rem;margin-bottom:.75rem">Your Badges</div>
+        <div id="badges" style="display:flex;flex-wrap:wrap;gap:.5rem"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<footer><p>🦉 © 2025 ProcrastiTrack · <a href="contact.html">Contact</a> · <a href="index.html">Home</a></p></footer>
+
+<!-- OWL TOAST -->
+<div id="memeToast">
+  <span class="meme-emoji-big" id="mEmo">🦉</span>
+  <div style="font-weight:800;font-size:.95rem;margin-bottom:.25rem" id="mTitle"></div>
+  <div class="meme-text" id="mSub"></div>
+  <div class="meme-text" id="mTask" style="color:var(--green-dk);font-size:.8rem;margin-top:4px"></div>
+  <button class="meme-close-btn" onclick="closeMeme()">Got it! 🚀</button>
+</div>
+
+<script src="app.js"></script>
+<script>
+let xpTotal = 1240;
+let tasks = [];
+const memeList = [
+  'images/motivational_owl_meme_1776022064264.png',
+  'images/homework_struggle_meme_1776022081198.png',
+  'images/bug_fixing_meme_1776022100799.png'
+];
+let currentMemeIdx = 0;
+
+function nextMeme() {
+  currentMemeIdx = (currentMemeIdx + 1) % memeList.length;
+  document.getElementById('freshMemeImg').src = memeList[currentMemeIdx];
+}
+
+async function fetchTasks() {
+  try {
+    const res = await fetch('api_tasks.php?action=read');
+    const data = await res.json();
+    if(data.success) {
+      tasks = data.tasks;
+      renderTasks(); renderStats(); updateGoalRing();
+    }
+  } catch(e) {
+    console.error('Error fetching tasks:', e);
+  }
+}
+
+function checkEnvironment() {
+  if (window.location.protocol === 'file:') {
+    document.getElementById('envWarning').style.display = 'block';
+  }
+}
+const badgeList = [
+  {e:"⚡",l:false,name:"Quick Draw"},{e:"🔥",l:false,name:"On Fire"},{e:"🚀",l:false,name:"Rocket Start"},
+  {e:"🏆",l:true,name:"Champion"},{e:"🧠",l:true,name:"Big Brain"},{e:"💎",l:true,name:"Diamond"},
+  {e:"🌟",l:true,name:"All-Star"},{e:"🎯",l:true,name:"Bullseye"}
+];
+let filterMode = 'all';
+
+function renderHearts() {
+  const s = getState();
+  const el = document.getElementById('heartsTopBar'); if(!el) return;
+  el.innerHTML = '';
+  for(let i=0;i<5;i++){
+    const h=document.createElement('span');
+    h.className='heart'+(i>=s.hearts?' lost':'');
+    h.style.fontSize='1.3rem'; h.textContent='❤️'; el.appendChild(h);
+  }
+}
+
+function renderStats() {
+  const total=tasks.length, done=tasks.filter(t=>t.done).length, over=tasks.filter(t=>!t.done&&t.status==='overdue').length;
+  document.getElementById('statRow').innerHTML = [
+    ['📋','Today',tasks.filter(t=>t.due==='Today'||t.due==='Overdue').length,'green'],
+    ['✅','Done',done,'gold-dk'],
+    ['🚨','Overdue',over,'red'],
+    ['🔥','Streak','5 days','orange'],
+  ].map(([e,l,v,c])=>`
+    <div class="duo-card ${c.split('-')[0]}" style="text-align:center;padding:1rem">
+      <div style="font-size:1.5rem">${e}</div>
+      <div style="font-weight:900;font-size:1.6rem;color:var(--${c});margin:.2rem 0">${v}</div>
+      <div class="stat-label">${l}</div>
+    </div>`).join('');
+}
+
+function renderTasks() {
+  const filtered = filterMode==='all' ? tasks :
+    filterMode==='overdue' ? tasks.filter(t=>t.status==='overdue'&&!t.done) :
+    tasks.filter(t=>!t.done);
+  const cont = document.getElementById('taskContainer');
+  if(!filtered.length){
+    cont.innerHTML='<div style="padding:2.5rem;text-align:center;color:var(--text2);font-size:1rem;font-weight:700">🎉 All clear! You\'re crushing it!</div>';
+    return;
+  }
+  cont.innerHTML = filtered.map(t => {
+    const cls = t.done ? 'done-btn' : t.status==='overdue' ? 'overdue' : t.status==='today' ? 'today-btn' : '';
+    const statusPill = t.done ? '<span class="pill pill-green">Done ✓</span>' :
+      t.status==='overdue' ? '<span class="pill pill-red">Overdue!</span>' :
+      t.status==='today' ? '<span class="pill pill-gold">Due Today</span>' :
+      '<span class="pill pill-blue">Upcoming</span>';
+    return `
+    <button class="lesson-btn ${cls}" onclick="toggleTask('${t.id}')" id="task-btn-${t.id}">
+      <div class="check-btn">${t.done?'✓':''}</div>
+      <div style="flex:1;min-width:0">
+        <div class="task-name" style="font-size:.95rem;font-weight:800">${t.title}</div>
+        <div style="font-size:.8rem;color:var(--text2);margin-top:2px;font-weight:600">${t.subject} · ${t.due} ${t.source==='classroom'?'<span class="pill pill-green" style="font-size:.65rem">Classroom</span>':''}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+        ${statusPill}
+        <span class="xp-pill">+${t.xp} XP</span>
+      </div>
+    </button>`;
+  }).join('');
+}
+
+async function toggleTask(id) {
+  const t = tasks.find(x=>x.id==id);
+  if(!t) return;
+  
+  if(t.status==='overdue' && !t.done) {
+    const s=getState(); if(s.hearts>0){ s.hearts--; saveState(s); }
+    renderHearts(); showMeme(t.title); 
+    // We allow overdue task submission but it costs a streak/heart immediately.
+  }
+  
+  // Optimistic UI update
+  t.done = !t.done;
+  if(t.done) xpTotal += t.xp;
+  else xpTotal -= t.xp;
+  
+  const btn=document.getElementById('task-btn-'+id);
+  if(btn && t.done){
+    const r=btn.getBoundingClientRect();
+    floatXP(t.xp, r.left+r.width/2-40, r.top-20);
+    confettiBurst(r.left+r.width/2, r.top+r.height/2);
+  }
+  renderTasks(); renderStats(); updateGoalRing();
+
+  const doneCount = tasks.filter(x=>x.done).length;
+  if(doneCount === tasks.length && tasks.length > 0) showCelebration("All done! 🎉","You completed all tasks! ProcrastiTrack is proud of you!","");
+
+  // Push to server
+  try {
+    const fd = new FormData();
+    fd.append('action', 'toggle');
+    fd.append('task_id', id);
+    await fetch('api_tasks.php', { method: 'POST', body: fd });
+  } catch(e) {
+    console.error("API error toggling task", e);
+  }
+}
+
+function updateGoalRing(){
+  const done=tasks.filter(t=>t.done).length, total=tasks.length;
+  const circ=282.74, pct=total>0?done/total:0;
+  const ring=document.getElementById('goalRing');
+  if(ring) ring.style.strokeDashoffset=(circ*(1-pct)).toFixed(2);
+  const gd=document.getElementById('goalDone'); if(gd) gd.textContent=done;
+  const gt=document.getElementById('goalTotal'); if(gt) gt.textContent=total;
+}
+
+function filterTasks(m){
+  filterMode=m;
+  ['fAll','fOver','fPend'].forEach(id=>document.getElementById(id)?.classList.remove('btn-primary'));
+  const map={all:'fAll',overdue:'fOver',pending:'fPend'};
+  document.getElementById(map[m])?.classList.add('btn-primary');
+  renderTasks();
+}
+
+function renderWeek(){
+  const days=['M','T','W','T','F','S','S'],done=[true,true,true,true,true,false,false];
+  const today=3;
+  document.getElementById('weekDots').innerHTML=days.map((d,i)=>
+    `<div class="week-dot ${done[i]?'done':''} ${i===today?'today':''}">
+      <span>${d}</span>
+      <span style="font-size:.9rem">${done[i]?'🔥':'·'}</span>
+    </div>`).join('');
+}
+
+function renderLeaderboard(){
+  // Removed leaderboard as requested, using Memes instead.
+}
+
+function renderBadges(){
+  document.getElementById('badges').innerHTML=badgeList.map(b=>
+    `<div class="badge-item${b.l?' locked':''}" title="${b.l?'🔒 Locked':'✅ '+b.name}: ${b.name}">${b.e}</div>`).join('');
+}
+
+// ─── GOOGLE CLASSROOM REAL INTEGRATION ───
+const GC_CLIENT_ID = '20643580412-m6fla9valf55va91a3892qibk5hdo5kb.apps.googleusercontent.com';
+const GC_SCOPES = 'https://www.googleapis.com/auth/classroom.courses.readonly https://www.googleapis.com/auth/classroom.coursework.me.readonly https://www.googleapis.com/auth/userinfo.profile';
+let gcTokenClient = null;
+let gcAccessToken = localStorage.getItem('gc_access_token') || null;
+let gcUserEmail   = localStorage.getItem('gc_user_email') || null;
+
+function initGoogleClient() {
+  if (typeof google === 'undefined') { setTimeout(initGoogleClient, 500); return; }
+  gcTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GC_CLIENT_ID,
+    scope: GC_SCOPES,
+    callback: async (resp) => {
+      if (resp.error) { setClassroomStatus('error', '❌ Auth failed: ' + resp.error); return; }
+      gcAccessToken = resp.access_token;
+      localStorage.setItem('gc_access_token', gcAccessToken);
+      await fetchAndLoadClassroom();
+    }
+  });
+  if (gcAccessToken) updateConnectedBadge();
+}
+
+function syncClassroom() {
+  const btn  = document.getElementById('syncBtn');
+  const btn2 = document.getElementById('syncBtn2');
+  [btn, btn2].forEach(b => { if(b){ b.disabled=true; } });
+  btn && (btn.textContent = '⟳ Connecting...');
+  setClassroomStatus('loading', '⏳ Connecting to Google...');
+
+  setTimeout(() => {
+    if (document.getElementById('classroomStatus').innerText.includes('Connecting')) {
+      setClassroomStatus('error', '❌ Connection timed out. Ensure you are using http://localhost and have authorized the user in Google Console.');
+      resetSyncBtns();
+    }
+  }, 60000);
+
+  if (!gcTokenClient) {
+    setClassroomStatus('error', '❌ Google library not ready.');
+    resetSyncBtns(); return;
+  }
+  gcTokenClient.requestAccessToken({ prompt: gcAccessToken ? '' : 'consent' });
+}
+
+async function fetchAndLoadClassroom() {
+  setClassroomStatus('loading', '📚 Syncing assignments...');
+  try {
+    const uRes = await gcFetch('https://www.googleapis.com/oauth2/v2/userinfo');
+    if (uRes.email) { gcUserEmail = uRes.email; localStorage.setItem('gc_user_email', gcUserEmail); updateConnectedBadge(); }
+    const cRes = await gcFetch('https://classroom.googleapis.com/v1/courses?courseStates=ACTIVE&pageSize=20');
+    const courses = cRes.courses || [];
+    if (!courses.length) { setClassroomStatus('error', '🎓 No active courses.'); resetSyncBtns(); return; }
+    renderCoursePills(courses);
+    const allWork = await Promise.all(courses.map(c => fetchCoursework(c)));
+    const flat = allWork.flat();
+    const newTasks = flat.map(mapAssignment).filter(Boolean);
+    
+    // POST to backend
+    const res = await fetch('api_tasks.php?action=sync_classroom', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newTasks)
+    });
+    const result = await res.json();
+    
+    setClassroomStatus('connected', `✅ ${gcUserEmail} · Synced ${result.added || 0} new tasks!`);
+    fetchTasks();
+  } catch(e) { setClassroomStatus('error', '❌ Sync failed.'); console.error(e); }
+  resetSyncBtns();
+}
+
+async function fetchCoursework(course) {
+  try {
+    const r = await gcFetch(`https://classroom.googleapis.com/v1/courses/${course.id}/courseWork?orderBy=dueDate+asc&pageSize=50`);
+    return (r.courseWork || []).map(w => ({...w, _courseName: course.name}));
+  } catch { return []; }
+}
+
+function mapAssignment(w) {
+  if (!w || !w.id) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  let dueLabel = 'No due date', status = 'upcoming', dueDate = null;
+  let dueDateRaw = null;
+  if (w.dueDate) {
+    const d = new Date(w.dueDate.year, w.dueDate.month - 1, w.dueDate.day);
+    dueDate = d;
+    dueDateRaw = `${w.dueDate.year}-${String(w.dueDate.month).padStart(2,'0')}-${String(w.dueDate.day).padStart(2,'0')}`;
+    const diff = Math.round((d - today) / 86400000);
+    if (diff < 0)       { dueLabel = 'Overdue';        status = 'overdue'; }
+    else if (diff === 0){ dueLabel = 'Today';           status = 'today'; }
+    else if (diff === 1){ dueLabel = 'Tomorrow';        status = 'upcoming'; }
+    else                { dueLabel = `In ${diff} days`; status = 'upcoming'; }
+  }
+  const pts = w.maxPoints || 50;
+  return {
+    id: 'gc_' + w.id, classroomId: w.id,
+    title: w.title || 'Untitled',
+    subject: w._courseName || 'Classroom',
+    due: dueLabel, dueDateRaw: dueDateRaw, status, done: false, xp: Math.min(100, Math.max(10, Math.round(pts * 0.8))),
+    source: 'classroom'
+  };
+}
+
+async function gcFetch(url) {
+  const r = await fetch(url, { headers: { Authorization: 'Bearer ' + gcAccessToken } });
+  if (!r.ok) throw new Error('API error ' + r.status);
+  return r.json();
+}
+
+function setClassroomStatus(type, msg) {
+  const el = document.getElementById('classroomStatus'); if (el) el.innerHTML = `<div class="sync-banner ${type}">${msg}</div>`;
+}
+
+function renderCoursePills(courses) {
+  const el = document.getElementById('courseList'); if (!el) return;
+  el.innerHTML = courses.slice(0,6).map(c => `<span class="gc-course-pill">📚 ${c.name}</span>`).join('');
+}
+
+function updateConnectedBadge() {
+  const badge = document.getElementById('gcAccountBadge'); if (badge) { badge.style.display = 'flex'; badge.textContent = '✅ ' + gcUserEmail; }
+}
+
+function resetSyncBtns() {
+  const btn = document.getElementById('syncBtn'), btn2 = document.getElementById('syncBtn2');
+  [btn, btn2].forEach(b => { if(b) b.disabled=false; });
+  if(btn) btn.textContent = '⟳ Sync Classroom';
+}
+
+window.addEventListener('load',()=>{
+  checkEnvironment();
+  renderHearts(); renderWeek(); renderBadges();
+  fetchTasks(); // Load from MySQL instead of rendering hardcoded tasks
+  setTimeout(()=>{ const f=document.getElementById('xpFill'); if(f) f.style.width='83%'; }, 400);
+  initGoogleClient();
+});
+</script>
+</body></html>

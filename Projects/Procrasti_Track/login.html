@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login — ProcrastiTrack</title>
+<meta name="description" content="Log in or sign up to start gamifying your academic life with ProcrastiTrack.">
+<link rel="stylesheet" href="style.css">
+<style>
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:600;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><span class="owl-icon">🦉</span>Procrasti<em>Track</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html" class="nav-cta active">Login</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div class="login-wrap">
+    <div class="login-card fade-up">
+
+      <!-- OWL MASCOT HEADER -->
+      <div style="text-align:center;margin-bottom:2rem">
+        <div style="font-size:4rem;margin-bottom:.75rem" class="bounce">🦉</div>
+        <h2 style="margin-bottom:.375rem">Join the class!</h2>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:600">Duo is waiting for you. Start your streak today.</p>
+      </div>
+
+      <!-- GOOGLE LOGIN -->
+      <button onclick="googleLogin()" id="google-login-btn" class="btn btn-google" style="width:100%;justify-content:center;margin-bottom:.75rem;padding:13px;font-size:1rem">
+        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="22" alt="G"> Sign in with Google + Classroom
+      </button>
+      <div style="background:var(--green-lt);border:2px solid var(--green);border-radius:var(--radius-sm);padding:.75rem 1rem;font-size:.82rem;color:var(--green-dk);margin-bottom:1.25rem;font-weight:700;text-align:center">
+        ✓ Recommended — auto-connects Google Classroom & imports your assignments
+      </div>
+
+      <div class="divider-text">or continue with email</div>
+
+      <!-- TABS -->
+      <div style="display:flex;border-bottom:2px solid var(--border);margin-bottom:1.5rem">
+        <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Log in</button>
+        <button class="tab-btn" id="tabSignup" onclick="switchTab('signup')">Sign up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div id="loginForm">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="you@college.edu">
+        </div>
+        <div class="form-group">
+          <label style="display:flex;justify-content:space-between">Password <a href="#" style="color:var(--green);font-size:.8rem;font-weight:700">Forgot?</a></label>
+          <input type="password" id="loginPw" placeholder="••••••••">
+        </div>
+        <button onclick="emailLogin()" id="login-btn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem;font-size:1rem">Log in & start learning →</button>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div id="signupForm" style="display:none">
+        <div class="form-group"><label>Your name</label><input type="text" id="signName" placeholder="e.g. Arjun Sharma"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signEmail" placeholder="you@college.edu"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="signPw" placeholder="Min. 8 characters"></div>
+        <div class="form-group"><label>School / College</label><input type="text" id="signSchool" placeholder="e.g. VIT Chennai"></div>
+        <button onclick="emailSignup()" id="signup-btn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:.5rem;font-size:1rem">Create account & play →</button>
+      </div>
+
+      <!-- XP INCENTIVE -->
+      <div style="display:flex;gap:.75rem;margin-top:1.5rem;justify-content:center;flex-wrap:wrap">
+        <span class="pill pill-gold">🔥 Earn XP from day 1</span>
+        <span class="pill pill-green">🎯 Free forever</span>
+        <span class="pill pill-blue">🔒 Privacy first</span>
+      </div>
+
+      <p style="text-align:center;font-size:.75rem;color:var(--text3);margin-top:1.25rem;font-weight:600">
+        By continuing you agree to our <a href="#" style="color:var(--green)">Terms</a> & <a href="#" style="color:var(--green)">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div id="successOverlay" class="success-overlay">
+  <div class="celebration-card">
+    <div style="font-size:4rem;margin-bottom:1rem">🦉</div>
+    <h2 style="color:var(--green);margin-bottom:.5rem">Welcome aboard!</h2>
+    <p style="color:var(--text2);margin-bottom:1.5rem;font-weight:600">Connecting to Google Classroom and loading your assignments...</p>
+    <div style="background:var(--green-lt);border:2px solid var(--green);border-radius:99px;height:14px;overflow:hidden;margin-bottom:.75rem">
+      <div id="loadBar" style="height:100%;background:var(--green);border-radius:99px;width:0%;transition:width .5s ease"></div>
+    </div>
+    <p style="font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:1.5rem" id="loadStatus">Connecting to Google Classroom...</p>
+    <a href="dashboard.html" id="gotoDash" class="btn btn-primary" style="width:100%;justify-content:center;display:none">Go to Dashboard 🚀</a>
+  </div>
+</div>
+
+<div id="memeToast">
+  <span class="meme-emoji-big" id="mEmo"></span>
+  <div style="font-weight:800;font-size:.95rem;margin-bottom:.25rem" id="mTitle"></div>
+  <div class="meme-text" id="mSub"></div>
+  <div class="meme-text" id="mTask" style="color:var(--green-dk);font-size:.8rem"></div>
+  <button class="meme-close-btn" onclick="closeMeme()">Got it! Let's go 🚀</button>
+</div>
+
+<footer><p>🦉 © 2025 ProcrastiTrack · <a href="index.html">Home</a> · <a href="about.html">About</a></p></footer>
+
+<script src="app.js"></script>
+<script>
+function switchTab(t){
+  document.getElementById('loginForm').style.display=t==='login'?'block':'none';
+  document.getElementById('signupForm').style.display=t==='signup'?'block':'none';
+  document.getElementById('tabLogin').classList.toggle('active',t==='login');
+  document.getElementById('tabSignup').classList.toggle('active',t==='signup');
+}
+function googleLogin(){ showLoginSuccess(); }
+function emailLogin(){
+  const e=document.getElementById('loginEmail').value;
+  const p=document.getElementById('loginPw').value;
+  if(!e||!p){ alert('Please fill in all fields.'); return; }
+  showLoginSuccess();
+}
+function emailSignup(){
+  const n=document.getElementById('signName').value;
+  const e=document.getElementById('signEmail').value;
+  if(!n||!e){ alert('Please fill in all fields.'); return; }
+  showLoginSuccess();
+}
+function showLoginSuccess(){
+  const ov=document.getElementById('successOverlay');
+  ov.style.display='flex';
+  confettiBurst(window.innerWidth/2, window.innerHeight/2);
+  const steps=[
+    [400,'Connecting to Google Classroom...','20%'],
+    [1200,'Fetching your courses...','45%'],
+    [2000,'Loading assignments & due dates...','70%'],
+    [2800,'Setting up your XP profile...','90%'],
+    [3400,'All done! 🎉 5 assignments loaded','100%'],
+  ];
+  steps.forEach(([t,msg,pct])=>{
+    setTimeout(()=>{
+      document.getElementById('loadStatus').textContent=msg;
+      document.getElementById('loadBar').style.width=pct;
+    },t);
+  });
+  setTimeout(()=>{
+    document.getElementById('gotoDash').style.display='flex';
+    confettiBurst(window.innerWidth/2, window.innerHeight/3);
+  },3600);
+}
+</script>
+</body></html>

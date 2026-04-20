@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — ProcrastiTrack</title>
+<meta name="description" content="Got questions, bugs, or feature requests? Duo and the ProcrastiTrack team are here to help.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><span class="owl-icon">🦉</span>Procrasti<em>Track</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="login.html" class="nav-cta">Login</a></li>
+  </ul>
+</nav>
+<div class="page">
+  <section class="hero" style="padding-bottom:2rem">
+    <div class="badge-pill fade-up">💬 Get in touch</div>
+    <h1 class="fade-up d1">We actually<br><span class="hl">read every message</span></h1>
+    <p class="subtitle fade-up d2">Bug reports, feature requests, or just saying hi — all welcome. Response time: 24hrs (or after our deadlines).</p>
+  </section>
+
+  <div style="max-width:960px;margin:0 auto;padding:0 2rem 5rem;display:grid;grid-template-columns:1fr 1.4fr;gap:2rem;align-items:start">
+
+    <!-- LEFT PANEL -->
+    <div>
+      <!-- Owl panel -->
+      <div class="duo-card" style="margin-bottom:1rem;text-align:center;padding:1.75rem">
+        <div style="font-size:3.5rem;margin-bottom:.75rem" class="bounce">🦉</div>
+        <h3 style="margin-bottom:.5rem">Duo says hi!</h3>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:600">We read every message. Even the weird ones. Especially the weird ones.</p>
+      </div>
+
+      <div class="duo-card gold" style="margin-bottom:1rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📧</div>
+        <h3 style="margin-bottom:.25rem">Email</h3>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:600">hello@procrastitrack.app</p>
+      </div>
+      <div class="duo-card blue" style="margin-bottom:1rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🐦</div>
+        <h3 style="margin-bottom:.25rem">Twitter / X</h3>
+        <p style="color:var(--blue);font-size:.9rem;font-weight:700">@procrastitrack</p>
+      </div>
+      <div class="duo-card red" style="margin-bottom:1.25rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🐛</div>
+        <h3 style="margin-bottom:.25rem">Bug reports</h3>
+        <p style="color:var(--text2);font-size:.9rem;font-weight:600">github.com/procrastitrack/issues</p>
+      </div>
+
+      <!-- FAQ -->
+      <div class="card">
+        <h3 style="margin-bottom:.875rem">❓ Quick FAQ</h3>
+        <div id="faqList"></div>
+      </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="card" style="border-top:5px solid var(--green);padding:2rem">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem">
+        <span style="font-size:1.5rem">✉️</span>
+        <h3>Send a message</h3>
+      </div>
+      <div id="formWrap">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+          <div class="form-group"><label>Name</label><input type="text" id="cName" placeholder="Your name"></div>
+          <div class="form-group"><label>Email</label><input type="email" id="cEmail" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="cSubject">
+            <option>General question</option>
+            <option>Bug report 🐛</option>
+            <option>Feature request ⚡</option>
+            <option>Google Classroom issue</option>
+            <option>XP / streak problem</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cMsg" rows="5" placeholder="Tell us everything. Duo is listening 🦉"></textarea>
+        </div>
+        <button onclick="submitContact()" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem" id="sendBtn">
+          Send message 🚀
+        </button>
+        <p style="font-size:.75rem;color:var(--text3);margin-top:.75rem;text-align:center;font-weight:600">
+          Powered by <a href="contact.php" style="color:var(--green)">contact.php</a> backend
+        </p>
+      </div>
+      <div id="formSuccess" style="display:none;text-align:center;padding:2rem 0">
+        <div style="font-size:4rem;margin-bottom:.75rem">🦉</div>
+        <h3 style="color:var(--green);margin-bottom:.5rem">Duo received your message!</h3>
+        <p style="color:var(--text2);font-size:.95rem;font-weight:600;margin-bottom:.5rem">We'll reply within 24 hours.</p>
+        <p style="color:var(--text2);font-size:.85rem;font-weight:500;">P.S. For reaching out, you earn <strong style="color:var(--gold-dk)">+5 bonus XP ⚡</strong></p>
+        <button onclick="resetForm()" class="btn btn-ghost" style="margin-top:1.5rem">Send another message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="memeToast">
+  <span class="meme-emoji-big" id="mEmo"></span>
+  <div style="font-weight:800;font-size:.95rem;margin-bottom:.25rem" id="mTitle"></div>
+  <div class="meme-text" id="mSub"></div>
+  <div class="meme-text" id="mTask" style="color:var(--green-dk);font-size:.8rem"></div>
+  <button class="meme-close-btn" onclick="closeMeme()">Got it! Let's go 🚀</button>
+</div>
+<footer><p>🦉 © 2025 ProcrastiTrack · <a href="index.html">Home</a> · <a href="about.html">About</a></p></footer>
+<script src="app.js"></script>
+<script>
+const faqs = [
+  {q:"Is ProcrastiTrack free?",a:"Yes — all core features are free for students. Always. No paywalls, ever."},
+  {q:"How does Google Classroom connect?",a:"OAuth 2.0 — we only request read access to your assignments. We never modify your Classroom data."},
+  {q:"How do I earn XP?",a:"Complete tasks on time. Submit early for ×2 XP. Maintain your streak for bonus multipliers!"},
+  {q:"What happens if I run out of hearts?",a:"Duo gets really sad 😢. You can refill hearts by completing bonus challenges or waiting 24 hours."},
+  {q:"Can I add tasks manually?",a:"Absolutely. Classroom sync is optional but highly recommended."},
+];
+document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+  <div style="border-bottom:2px solid var(--border);padding:.75rem 0;cursor:pointer" onclick="toggleFaq(${i})">
+    <div style="display:flex;justify-content:space-between;align-items:center;font-size:.9rem;font-weight:700">
+      ${f.q}<span id="faqArrow${i}" style="color:var(--green);font-size:1.1rem;font-weight:900">+</span>
+    </div>
+    <div id="faqAns${i}" style="display:none;font-size:.85rem;color:var(--text2);margin-top:.5rem;line-height:1.7;font-weight:500">${f.a}</div>
+  </div>`).join('');
+
+function toggleFaq(i){
+  const ans=document.getElementById('faqAns'+i);
+  const arr=document.getElementById('faqArrow'+i);
+  const open=ans.style.display!=='none';
+  ans.style.display=open?'none':'block';
+  arr.textContent=open?'+':'−';
+}
+function submitContact(){
+  const n=document.getElementById('cName').value.trim();
+  const e=document.getElementById('cEmail').value.trim();
+  const m=document.getElementById('cMsg').value.trim();
+  if(!n||!e||!m){alert('Please fill in name, email, and message.');return;}
+  const btn=document.getElementById('sendBtn');
+  btn.textContent='Sending... 🦉'; btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('formWrap').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+    confettiBurst(window.innerWidth/2, window.innerHeight/2);
+    floatXP(5, window.innerWidth/2-30, window.innerHeight/2);
+  },1200);
+}
+function resetForm(){
+  document.getElementById('formWrap').style.display='block';
+  document.getElementById('formSuccess').style.display='none';
+  document.getElementById('sendBtn').textContent='Send message 🚀';
+  document.getElementById('sendBtn').disabled=false;
+  ['cName','cEmail','cMsg'].forEach(id=>document.getElementById(id).value='');
+}
+</script>
+</body></html>

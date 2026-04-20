@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ProcrastiTrack — Gamified Student Productivity</title>
+<meta name="description" content="Turn your deadlines into a game. Earn XP, maintain streaks, and level up while crushing your assignments — Duolingo-style.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html"><span class="owl-icon">🦉</span>Procrasti<em>Track</em></a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="features.html">Features</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="login.html" class="nav-cta">Login</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="badge-pill fade-up">🎓 The #1 gamified study tracker for students</div>
+    <h1 class="fade-up d1">Learn. Complete.<br><span class="hl">Level up.</span></h1>
+    <p class="subtitle fade-up d2">ProcrastiTrack turns your assignments into an epic quest. Earn XP, keep streaks alive, compete with classmates — and actually get stuff done.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap" class="fade-up d3">
+      <a href="login.html" id="hero-start-btn" class="btn btn-primary" style="font-size:1.05rem;padding:14px 36px">🚀 Start for Free</a>
+      <a href="features.html" id="hero-features-btn" class="btn btn-ghost" style="font-size:1.05rem;padding:14px 28px">See features →</a>
+    </div>
+
+    <!-- Stat pills -->
+    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap" class="fade-up d4">
+      <span class="pill pill-green">✓ 8,100+ active students</span>
+      <span class="pill pill-gold">🔥 Avg 4.2-day streak</span>
+      <span class="pill pill-blue">⚡ 142K tasks completed</span>
+    </div>
+  </section>
+
+  <!-- OWL WELCOME BANNER -->
+  <div style="background:var(--green-lt);border-top:2px solid var(--green);border-bottom:2px solid var(--green);padding:2rem;margin-bottom:1rem;">
+    <div class="owl-mascot" style="max-width:700px;margin:0 auto;justify-content:center">
+      <div class="owl-img bounce">🦉</div>
+      <div class="owl-bubble">
+        <strong>Welcome back, Student!</strong><br>
+        You have <strong style="color:var(--red)">3 overdue tasks</strong> and your streak is at <strong style="color:var(--gold-dk)">🔥 5 days</strong>. Don't let Duo down! Complete a task now to earn XP.
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS — Lesson path style -->
+  <div class="section" style="padding-top:3rem">
+    <div class="section-header">
+      <span class="badge-pill">🗺️ Your learning journey</span>
+      <h2 style="margin-top:1rem">Four steps to academic victory</h2>
+      <p>Like Duolingo, but for your actual homework. Each step builds on the last.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;max-width:1000px;margin:0 auto">
+      <div class="duo-card fade-up" id="step1-card">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🔗</div>
+        <div class="xp-pill" style="margin-bottom:.75rem">+25 XP</div>
+        <h3>1. Connect Classroom</h3>
+        <p style="color:var(--text2);margin-top:.5rem;font-size:.9rem;font-weight:500">OAuth login pulls all your Google Classroom assignments automatically. No manual entry.</p>
+      </div>
+      <div class="duo-card gold fade-up d1" id="step2-card">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🎯</div>
+        <div class="xp-pill" style="margin-bottom:.75rem">+50 XP per task</div>
+        <h3>2. Complete Tasks</h3>
+        <p style="color:var(--text2);margin-top:.5rem;font-size:.9rem;font-weight:500">Check off assignments to earn XP. Submit early for bonus XP. Every task counts toward your level.</p>
+      </div>
+      <div class="duo-card blue fade-up d2" id="step3-card">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🔥</div>
+        <div class="xp-pill" style="margin-bottom:.75rem">×2 streak bonus</div>
+        <h3>3. Keep Streaks</h3>
+        <p style="color:var(--text2);margin-top:.5rem;font-size:.9rem;font-weight:500">Complete at least one task daily to maintain your streak. Streaks multiply your XP earned.</p>
+      </div>
+      <div class="duo-card purple fade-up d3" id="step4-card">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">🏆</div>
+        <div class="xp-pill" style="margin-bottom:.75rem">Leaderboard glory</div>
+        <h3>4. Climb the Board</h3>
+        <p style="color:var(--text2);margin-top:.5rem;font-size:.9rem;font-weight:500">Compete with classmates on a live leaderboard. Nobody wants to be last. Social pressure works.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>🦉 © 2025 ProcrastiTrack · Built for students, by students · <a href="contact.html">Contact</a> · <a href="about.html">About</a></p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+window.addEventListener('load', () => {
+  // Preview XP bar
+  setTimeout(() => { const f=document.getElementById('previewXp'); if(f) f.style.width='83%'; }, 400);
+});
+</script>
+</body></html>
