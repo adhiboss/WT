@@ -48,12 +48,12 @@ The experiments are designed to help me progress step-by-step from:
 | 2 | Create a static E-commerce website using Advanced HTML tags | ✅ Done |
 | 3 | Enhance Exercise-1 using Inline, Internal and External CSS | ✅ Done |
 | 4 | Enhance Exercise-2 using Inline, Internal and External CSS | ✅ Done |
-| 5 | Add Scientific Calculator as a menu in Exercise-1 using JavaScript | ⬜ Pending |
-| 6 | Create Registration + Login form for Exercise-2 and validate using JavaScript | ⬜ Pending |
-| 7 | Perform Event Handling mechanisms Exercise-1 and 2 | ⬜ Pending |
-| 8 | Perform Form Handling and Form Validation for Exercise-1 & 2 using PHP | ⬜ Pending |
-| 9 | Create, store, retrieve and display product details using PHP + MySQL | ⬜ Pending |
-| 10 | Implement Sessions and Cookies to store information across pages | ⬜ Pending |
+| 5 | Add Scientific Calculator as a menu in Exercise-1 using JavaScript | ✅ Done |
+| 6 | Create Registration + Login form for Exercise-2 and validate using JavaScript | ✅ Done |
+| 7 | Perform Event Handling mechanisms Exercise-1 and 2 | ✅ Done |
+| 8 | Perform Form Handling and Form Validation for Exercise-1 & 2 using PHP | ✅ Done |
+| 9 | Create, store, retrieve and display product details using PHP + MySQL | ✅ Done |
+| 10 | Implement Sessions and Cookies to store information across pages | ✅ Done |
 
 ---
 
