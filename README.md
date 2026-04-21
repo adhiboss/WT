@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/badge/Web%20Technology-Lab%20Work-red?style=for-the-badge">
   <img src="https://img.shields.io/badge/HTML-Completed-orange?style=for-the-badge">
   <img src="https://img.shields.io/badge/CSS-Completed-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/JavaScript-Upcoming-yellow?style=for-the-badge">
+  <img src="https://img.shields.io/badge/JavaScript-yellow?style=for-the-badge">
   <img src="https://img.shields.io/badge/PHP%20%2B%20MySQL-Upcoming-green?style=for-the-badge">
 </p>
 
