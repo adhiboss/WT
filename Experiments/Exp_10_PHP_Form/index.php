@@ -322,6 +322,12 @@ $submissions = loadSubmissions();
     </div>
     <?php endif; ?>
 
+    <!-- EXPERIMENT PROOF -->
+    <div class="form-card" style="margin-top: 40px; text-align: center;">
+        <h2 style="margin-bottom: 20px;">Experiment Proof</h2>
+        <p style="margin-bottom: 15px; color: #666;">Please save your screenshot as <code>proof.png</code> in this directory to display it here.</p>
+        <img src="proof.png" alt="Experiment Proof" style="max-width: 100%; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    </div>
 </main>
 
 <footer class="footer">

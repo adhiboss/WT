@@ -199,6 +199,12 @@ unset($_SESSION['flash']);
                 </div>
             </div><!--/.table-section-->
 
+            <!-- EXPERIMENT PROOF -->
+            <div class="table-section" style="margin-top: 40px; padding: 30px; text-align: center; border: 1px dashed var(--border); border-radius: 12px; background: var(--bg-card);">
+                <h2 style="margin-bottom: 20px; color: var(--white);">Experiment Proof</h2>
+                <p style="margin-bottom: 15px; color: var(--gray-400);">Please save your screenshot as <code>proof.png</code> in this directory to display it here.</p>
+                <img src="proof.png" alt="Experiment Proof" style="max-width: 100%; border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            </div>
         </div><!--/.main-->
 
         <footer class="footer">

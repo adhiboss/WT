@@ -111,6 +111,12 @@ $infoMsg = $msgMap[$_GET['msg'] ?? ''] ?? '';
         <p style="text-align:center;margin-top:12px;">
             <a href="../../index.html" style="font-size:13px;color:var(--gray-500);text-decoration:none;">← Back to Portfolio</a>
         </p>
+        <!-- EXPERIMENT PROOF -->
+        <div style="margin-top: 30px; text-align: center; padding-top: 20px; border-top: 1px solid var(--border);">
+            <h3 style="margin-bottom: 10px; font-size: 16px; color: var(--gray-700);">Experiment Proof</h3>
+            <p style="font-size: 12px; color: var(--gray-500); margin-bottom: 10px;">Please save your screenshot as <code>proof.png</code> in this directory.</p>
+            <img src="proof.png" alt="Experiment Proof" style="max-width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+        </div>
     </div>
 </div>
 </body>
