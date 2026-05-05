@@ -1,444 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Technology Lab | Adithya Gowda</title>
-    <meta name="description" content="Web Technology Lab - Experiments and Projects by Adithya Gowda">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <div class="bg-pattern"></div>
 
-    <!-- Cursor Glow -->
-    <div class="cursor-glow" id="cursorGlow"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-brand">
-            <span class="brand-dot"></span>
-            <span class="brand-text">ADITHYA<span class="brand-accent">.</span></span>
-        </div>
-        <div class="nav-links">
-            <a href="#hero" class="nav-link">HOME</a>
-            <a href="#experiments" class="nav-link">EXPERIMENTS</a>
-            <a href="#projects" class="nav-link">PROJECTS</a>
-            <a href="#about" class="nav-link">ABOUT</a>
-        </div>
-        <div class="nav-right">
-            <a href="#experiments" class="nav-circle-btn">
-                <span>GO</span>
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero Section - Cinematic -->
-    <section class="hero" id="hero">
-        <!-- Background Text -->
-        <div class="hero-bg-text">WEB TECH</div>
-
-        <div class="hero-grid">
-            <div class="hero-left">
-                <div class="hero-label">
-                    <span class="label-line"></span>
-                    <span>WEB TECHNOLOGY LAB / 2026</span>
-                </div>
-                <h1 class="hero-mega-title">
-                    WEB<br>TECHNOLOGY<span class="title-red">.</span>
-                </h1>
-                <p class="hero-desc">Building the future of web through creative experiments. HTML, CSS & JavaScript —
-                    one project at a time.</p>
-                <div class="hero-ctas">
-                    <a href="#experiments" class="cta-primary">
-                        <span class="cta-text">EXPLORE WORK</span>
-                        <span class="cta-arrow">↗</span>
-                    </a>
-                    <div class="cta-stats">
-                        <div class="cta-stat">
-                            <span class="cta-num">11</span>
-                            <span class="cta-label">EXPERIMENTS</span>
-                        </div>
-                        <div class="cta-stat">
-                            <span class="cta-num">04</span>
-                            <span class="cta-label">PROJECTS</span>
-                        </div>
-                    </div>
-                </div>
+    <header class="header">
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-mark"></div>
+                <div class="logo-text">WEB LAB</div>
             </div>
-
-            <div class="hero-center">
-                <div class="photo-frame" id="photoFrame">
-                    <img src="images/suit2.jpeg" alt="Adithya Gowda" class="hero-photo" id="heroPhoto">
-                    <div class="photo-border"></div>
-                </div>
-                <div class="photo-tag">
-                    <span class="tag-name">ADITHYA GOWDA</span>
-                    <span class="tag-role">CSE GEN A • 24BTRCN001</span>
-                </div>
-            </div>
-
-            <div class="hero-right">
-                <div class="side-text">
-                    <span>S</span><span>U</span><span>B</span><span>M</span><span>I</span><span>T</span><span>T</span><span>E</span><span>D</span>
-                </div>
-                <div class="hero-scroll-indicator">
-                    <div class="scroll-line"></div>
-                    <span>SCROLL</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ticker Strip -->
-    <div class="ticker-strip">
-        <div class="ticker-content">
-            <span>★ HTML5</span>
-            <span>★ CSS3</span>
-            <span>★ JAVASCRIPT</span>
-            <span>★ WEB DESIGN</span>
-            <span>★ CREATIVE CODING</span>
-            <span>★ ADITHYA GOWDA</span>
-            <span>★ HTML5</span>
-            <span>★ CSS3</span>
-            <span>★ JAVASCRIPT</span>
-            <span>★ WEB DESIGN</span>
-            <span>★ CREATIVE CODING</span>
-            <span>★ ADITHYA GOWDA</span>
-        </div>
-    </div>
-
-
-    <!-- Experiments Section -->
-    <section class="section" id="experiments">
-        <div class="section-header-row">
-            <div class="section-num">01</div>
-            <div>
-                <h2 class="section-mega-title">EXPERI<span class="title-red">MENTS</span></h2>
-                <p class="section-subtitle">Curated lab exercises categorized by core web technologies.</p>
-            </div>
-        </div>
-
-        <!-- ── HTML EXPERIMENTS ── -->
-        <div class="exp-category-header" id="cat-html">
-            <span class="exp-cat-emoji">📄</span>
-            <h3 class="exp-cat-title">HTML Experiments</h3>
-            <div class="exp-cat-line"></div>
-        </div>
-        <div class="experiment-grid">
-            <a href="Experiments/Exp_1_HTML_Portfolio/index.html" class="exp-card" id="exp-1">
-                <span class="exp-num">01</span>
-                <div class="exp-info">
-                    <h3>HTML PORTFOLIO</h3>
-                    <p>Personal website with minimum 4 web pages using basic HTML tags. Home, About, Skills, Projects
-                        &amp; Contact.</p>
-                </div>
-                <span class="exp-tag">HTML ONLY</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_3_HTML_Ecommerce/index.html" class="exp-card" id="exp-2">
-                <span class="exp-num">02</span>
-                <div class="exp-info">
-                    <h3>HTML E-COMMERCE</h3>
-                    <p>Static e-commerce site using advanced HTML tags — Home, Menu, Cart, Wishlist, Order &amp; Help
-                        pages.</p>
-                </div>
-                <span class="exp-tag">HTML ONLY</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-        </div>
-
-        <!-- ── CSS EXPERIMENTS ── -->
-        <div class="exp-category-header" id="cat-css">
-            <span class="exp-cat-emoji">🎨</span>
-            <h3 class="exp-cat-title">CSS Experiments</h3>
-            <div class="exp-cat-line exp-cat-line--css"></div>
-        </div>
-        <div class="experiment-grid">
-            <a href="Experiments/Exp_2_HTML_CSS_Portfolio/index.html" class="exp-card" id="exp-3">
-                <span class="exp-num">03</span>
-                <div class="exp-info">
-                    <h3>CSS PORTFOLIO</h3>
-                    <p>Enhanced personal website with Inline, Internal &amp; External CSS. Modern design with dark blue
-                        theme.</p>
-                </div>
-                <span class="exp-tag">WITH CSS</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_4_HTML_CSS_Ecommerce/index.html" class="exp-card" id="exp-4">
-                <span class="exp-num">04</span>
-                <div class="exp-info">
-                    <h3>CSS E-COMMERCE</h3>
-                    <p>Enhanced e-commerce site with Inline, Internal &amp; External CSS. Beautiful green &amp; yellow
-                        theme.</p>
-                </div>
-                <span class="exp-tag">WITH CSS</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-        </div>
-
-        <!-- ── JAVASCRIPT EXPERIMENTS ── -->
-        <div class="exp-category-header" id="cat-js">
-            <span class="exp-cat-emoji">⚡</span>
-            <h3 class="exp-cat-title">JavaScript Experiments</h3>
-            <div class="exp-cat-line exp-cat-line--js"></div>
-        </div>
-        <div class="experiment-grid">
-            <a href="Experiments/Exp_6_Simple_Calculator/index.html" class="exp-card" id="exp-5">
-                <span class="exp-num">05</span>
-                <div class="exp-info">
-                    <h3>SIMPLE CALCULATOR</h3>
-                    <p>Basic arithmetic calculator — addition, subtraction, multiplication &amp; division with keyboard
-                        support.</p>
-                </div>
-                <span class="exp-tag">JAVASCRIPT</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_7_iPhone_Calculator/index.html" class="exp-card" id="exp-6">
-                <span class="exp-num">06</span>
-                <div class="exp-info">
-                    <h3>iPHONE CALCULATOR</h3>
-                    <p>Realistic iPhone-style calculator with scientific mode — sin, cos, tan, log &amp; more.</p>
-                </div>
-                <span class="exp-tag">JAVASCRIPT</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_8_Registration_Form/index.html" class="exp-card" id="exp-7">
-                <span class="exp-num">07</span>
-                <div class="exp-info">
-                    <h3>REGISTRATION FORM</h3>
-                    <p>Dynamic form with real-time JS validation, error messages &amp; tabular data collection.</p>
-                </div>
-                <span class="exp-tag">JAVASCRIPT</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_9_Dashboard/index.html" class="exp-card" id="exp-8">
-                <span class="exp-num">08</span>
-                <div class="exp-info">
-                    <h3>MARKET DASHBOARD</h3>
-                    <p>Interactive student &amp; market dashboard — search, sort, filter &amp; real-time data
-                        management.</p>
-                </div>
-                <span class="exp-tag">JAVASCRIPT</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-        </div>
-
-        <!-- ── PHP & MySQL EXPERIMENTS ── -->
-        <div class="exp-category-header" id="cat-php">
-            <span class="exp-cat-emoji">🐘</span>
-            <h3 class="exp-cat-title">PHP &amp; MySQL Experiments</h3>
-            <div class="exp-cat-line exp-cat-line--php"></div>
-        </div>
-        <div class="experiment-grid">
-            <a href="Experiments/Exp_10_PHP_Form/index.php" class="exp-card" id="exp-9">
-                <span class="exp-num">09</span>
-                <div class="exp-info">
-                    <h3>PHP FORM HANDLING</h3>
-                    <p>Server-side validation, data sanitization, optional file upload &amp; JSON-based submission storage.</p>
-                </div>
-                <span class="exp-tag">PHP ONLY</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_11_PHP_CRUD/index.php" class="exp-card" id="exp-10">
-                <span class="exp-num">10</span>
-                <div class="exp-info">
-                    <h3>PHP + MySQL CRUD</h3>
-                    <p>Create, Read, Update &amp; Delete products using PDO MySQL. Image upload, search &amp; stats dashboard.</p>
-                </div>
-                <span class="exp-tag">PHP + MYSQL</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-
-            <a href="Experiments/Exp_12_PHP_Sessions/index.php" class="exp-card" id="exp-11">
-                <span class="exp-num">11</span>
-                <div class="exp-info">
-                    <h3>SESSIONS &amp; COOKIES</h3>
-                    <p>User login &amp; registration, session-based cart, Remember Me cookie, and protected pages.</p>
-                </div>
-                <span class="exp-tag">PHP + MYSQL</span>
-                <span class="exp-arrow">↗</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section section-alt" id="projects">
-        <div class="section-header-row">
-            <div class="section-num">02</div>
-            <div>
-                <h2 class="section-mega-title">PROJ<span class="title-red">ECTS</span></h2>
-                <p class="section-subtitle">Full-scale web projects showcasing creative design.</p>
-            </div>
-        </div>
-
-        <div class="project-showcase">
-            <a href="Projects/Adhizone/AmazonClone/index.html" class="showcase-item" id="proj-adhizone">
-                <div class="showcase-left">
-                    <span class="showcase-num">01</span>
-                    <div>
-                        <h3>ADHIZONE</h3>
-                        <p>Premium E-Commerce Experience — Products, Cart & Checkout</p>
-                    </div>
-                </div>
-                <div class="showcase-right">
-                    <span class="showcase-tag">E-COMMERCE</span>
-                    <span class="showcase-arrow">↗</span>
-                </div>
-            </a>
-
-            <a href="Projects/Daredevil/index.html" class="showcase-item" id="proj-daredevil">
-                <div class="showcase-left">
-                    <span class="showcase-num">02</span>
-                    <div>
-                        <h3>DAREDEVIL</h3>
-                        <p>Dark Theme Web Project — Bold, dramatic & immersive design</p>
-                    </div>
-                </div>
-                <div class="showcase-right">
-                    <span class="showcase-tag">CREATIVE</span>
-                    <span class="showcase-arrow">↗</span>
-                </div>
-            </a>
-
-            <a href="Projects/Sadhu/index.html" class="showcase-item" id="proj-sadhu">
-                <div class="showcase-left">
-                    <span class="showcase-num">03</span>
-                    <div>
-                        <h3>SADHU</h3>
-                        <p>Creative Web Project — Unique artistic vision brought to life</p>
-                    </div>
-                </div>
-                <div class="showcase-right">
-                    <span class="showcase-tag">ART</span>
-                    <span class="showcase-arrow">↗</span>
-                </div>
-            </a>
-
-            <a href="Projects/Procrasti_Track/index.html" class="showcase-item" id="proj-procrastitrack">
-                <div class="showcase-left">
-                    <span class="showcase-num">04</span>
-                    <div>
-                        <h3>PROCRASTITRACK</h3>
-                        <p>Task Management Dashboard — Cyber-Emerald aesthetic with gamification</p>
-                    </div>
-                </div>
-                <div class="showcase-right">
-                    <span class="showcase-tag">FULLSTACK</span>
-                    <span class="showcase-arrow">↗</span>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="about-layout">
-            <div class="about-left">
-                <div class="section-num">03</div>
-                <h2 class="section-mega-title">ABO<span class="title-red">UT</span></h2>
-                <div class="about-grid">
-                    <div class="about-card">
-                        <span class="about-label">NAME</span>
-                        <span class="about-value">Adithya Gowda</span>
-                    </div>
-                    <div class="about-card">
-                        <span class="about-label">USN</span>
-                        <span class="about-value">24BTRCN001</span>
-                    </div>
-                    <div class="about-card">
-                        <span class="about-label">CLASS</span>
-                        <span class="about-value">CSE GEN A</span>
-                    </div>
-                    <div class="about-card">
-                        <span class="about-label">SUBMITTED TO</span>
-                        <span class="about-value">Junaid Rasool Sir</span>
-                    </div>
-                </div>
-                <p class="about-quote">"I build websites... and break them also 😅"</p>
-            </div>
-            <div class="about-right">
-                <div class="about-photo-wrapper">
-                    <img src="images/suit.jpeg" alt="Adithya Gowda" class="about-main-photo">
-                    <div class="about-photo-label">
-                        <span>ADITHYA GOWDA</span>
-                        <span class="label-sm">WEB DEVELOPER</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="footer-brand">ADITHYA<span class="title-red">.</span></div>
-            <div class="footer-links">
-                <a href="#hero">HOME</a>
+            <nav class="nav-links">
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT</a>
                 <a href="#experiments">EXPERIMENTS</a>
                 <a href="#projects">PROJECTS</a>
-                <a href="#about">ABOUT</a>
+            </nav>
+            <a href="#experiments" class="btn btn-nav">VIEW WORK</a>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-text">
+                <div class="subtitle-wrapper">
+                    <div class="green-line"></div>
+                    <span class="subtitle">WHO I AM</span>
+                </div>
+                <h1 class="title">ADITHYA <span class="highlight">GOWDA</span></h1>
+                <p class="desc">
+                    I build websites... and break them also 😅. Welcome to my Web Technology Lab portfolio showcasing creative experiments and projects.
+                </p>
+                <p class="desc" id="about">
+                    <strong>USN:</strong> 24BTRCN001 <br>
+                    <strong>Class:</strong> CSE GEN A <br>
+                    <strong>Submitted To:</strong> Junaid Rasool Sir
+                </p>
+                <a href="#experiments" class="btn btn-main">READ MORE</a>
+            </div>
+            <div class="hero-img-wrapper">
+                <img src="images/suit2.jpeg" alt="Adithya Gowda" class="hero-img">
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 ADITHYA GOWDA — WEB TECHNOLOGY LAB</p>
-            <p>SUBMITTED TO JUNAID RASOOL SIR</p>
+    </section>
+
+    <section id="experiments" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <div class="subtitle-wrapper centered">
+                    <div class="green-line"></div>
+                    <span class="subtitle">LAB WORK</span>
+                </div>
+                <h2 class="title">MY <span class="highlight">EXPERIMENTS</span></h2>
+            </div>
+
+            <div class="grid">
+                <!-- HTML -->
+                <div class="card">
+                    <div class="card-tag">HTML</div>
+                    <h3>HTML Portfolio</h3>
+                    <p>Personal website with minimum 4 web pages using basic HTML tags.</p>
+                    <a href="Experiments/Exp_1_HTML_Portfolio/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">HTML</div>
+                    <h3>HTML E-Commerce</h3>
+                    <p>Static e-commerce site using advanced HTML tags for multiple pages.</p>
+                    <a href="Experiments/Exp_3_HTML_Ecommerce/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+
+                <!-- CSS -->
+                <div class="card">
+                    <div class="card-tag">CSS</div>
+                    <h3>CSS Portfolio</h3>
+                    <p>Enhanced personal website with modern design and styling.</p>
+                    <a href="Experiments/Exp_2_HTML_CSS_Portfolio/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">CSS</div>
+                    <h3>CSS E-Commerce</h3>
+                    <p>Enhanced e-commerce site with a beautiful color theme.</p>
+                    <a href="Experiments/Exp_4_HTML_CSS_Ecommerce/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+
+                <!-- JS -->
+                <div class="card">
+                    <div class="card-tag">JS</div>
+                    <h3>Simple Calculator</h3>
+                    <p>Basic arithmetic calculator with keyboard support.</p>
+                    <a href="Experiments/Exp_6_Simple_Calculator/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">JS</div>
+                    <h3>iPhone Calculator</h3>
+                    <p>Realistic iPhone-style calculator with scientific mode.</p>
+                    <a href="Experiments/Exp_7_iPhone_Calculator/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">JS</div>
+                    <h3>Registration Form</h3>
+                    <p>Dynamic form with real-time JS validation and error messages.</p>
+                    <a href="Experiments/Exp_8_Registration_Form/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">JS</div>
+                    <h3>Market Dashboard</h3>
+                    <p>Interactive dashboard with search, sort, and filtering capabilities.</p>
+                    <a href="Experiments/Exp_9_Dashboard/index.html" class="read-more">View Experiment &rarr;</a>
+                </div>
+
+                <!-- PHP -->
+                <div class="card">
+                    <div class="card-tag">PHP</div>
+                    <h3>PHP Form Handling</h3>
+                    <p>Server-side validation, data sanitization, and file upload.</p>
+                    <a href="Experiments/Exp_10_PHP_Form/index.php" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">PHP</div>
+                    <h3>PHP + MySQL CRUD</h3>
+                    <p>Create, Read, Update & Delete operations using PDO MySQL.</p>
+                    <a href="Experiments/Exp_11_PHP_CRUD/index.php" class="read-more">View Experiment &rarr;</a>
+                </div>
+                <div class="card">
+                    <div class="card-tag">PHP</div>
+                    <h3>Sessions & Cookies</h3>
+                    <p>User login, registration, and session-based cart management.</p>
+                    <a href="Experiments/Exp_12_PHP_Sessions/index.php" class="read-more">View Experiment &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="subtitle-wrapper centered">
+                    <div class="green-line"></div>
+                    <span class="subtitle">FULL-SCALE</span>
+                </div>
+                <h2 class="title">MY <span class="highlight">PROJECTS</span></h2>
+            </div>
+            
+            <div class="grid projects-grid">
+                <div class="card project-card">
+                    <h3>Adhizone</h3>
+                    <p>Premium E-Commerce Experience &mdash; Products, Cart & Checkout.</p>
+                    <a href="Projects/Adhizone/AmazonClone/index.html" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card project-card">
+                    <h3>Daredevil</h3>
+                    <p>Dark Theme Web Project &mdash; Bold, dramatic & immersive design.</p>
+                    <a href="Projects/Daredevil/index.html" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card project-card">
+                    <h3>Sadhu</h3>
+                    <p>Creative Web Project &mdash; Unique artistic vision brought to life.</p>
+                    <a href="Projects/Sadhu/index.html" class="read-more">View Project &rarr;</a>
+                </div>
+                <div class="card project-card">
+                    <h3>ProcrastiTrack</h3>
+                    <p>Task Management Dashboard &mdash; Cyber-Emerald aesthetic with gamification.</p>
+                    <a href="Projects/Procrasti_Track/index.html" class="read-more">View Project &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Adithya Gowda. Web Technology Lab.</p>
+            <p>Submitted to Junaid Rasool Sir.</p>
         </div>
     </footer>
-
-    <script>
-        // Cursor glow effect
-        document.addEventListener('mousemove', (e) => {
-            const glow = document.getElementById('cursorGlow');
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const t = document.querySelector(this.getAttribute('href'));
-                if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        // Navbar scroll
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-        });
-
-        // Hero photo rise animation
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('heroPhoto').classList.add('risen');
-                document.getElementById('photoFrame').classList.add('risen');
-            }, 400);
-        });
-
-        // Scroll reveal
-        const revealEls = document.querySelectorAll('.exp-card, .showcase-item, .cinema-card, .about-card');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 60);
-                    revealObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        revealEls.forEach(el => revealObserver.observe(el));
-    </script>
-
 </body>
-
 </html>
