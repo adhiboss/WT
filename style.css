@@ -199,13 +199,26 @@ a {
     position: relative;
 }
 
+.decorative-arrow {
+    position: absolute;
+    left: -80px;
+    bottom: 40px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
 .hero-img {
     width: 100%;
-    max-width: 450px;
+    max-width: 340px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: top;
     display: block;
     margin: 0 auto;
-    border-radius: 8px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-radius: 50%;
+    border: 12px solid var(--bg-white);
+    box-shadow: 0 0 0 4px #FDBF0F, 0 20px 40px rgba(0,0,0,0.15);
     position: relative;
     z-index: 2;
 }
